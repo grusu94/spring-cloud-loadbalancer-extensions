@@ -5,6 +5,7 @@ import org.springframework.cloud.client.ServiceInstance;
 import java.util.List;
 
 public interface LoadBalancingStrategy {
+
     /**
      * Filters or ranks service instances.
      *

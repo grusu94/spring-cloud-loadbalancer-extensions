@@ -14,7 +14,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * Feign request interceptor that copies current {@link ExecutionContext} entries to the feign headers pre-filtering the header names using the provided {@link #filter}.
+ * Feign request interceptor that copies current {@link ExecutionContext} entries to the feign headers pre-filtering the header names using the provided {@link #urlFilter}.
  *
  * @author Nadim Benabdenbi
  */

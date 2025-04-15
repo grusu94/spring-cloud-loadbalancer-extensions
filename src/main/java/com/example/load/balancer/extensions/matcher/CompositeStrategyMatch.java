@@ -4,11 +4,11 @@ import org.springframework.cloud.client.ServiceInstance;
 
 import java.util.List;
 
-public class CompositeStrategy implements LoadBalancingStrategy {
+public class CompositeStrategyMatch implements LoadBalancingStrategy {
 
     private final List<LoadBalancingStrategy> components;
 
-    public CompositeStrategy(List<LoadBalancingStrategy> components) {
+    public CompositeStrategyMatch(List<LoadBalancingStrategy> components) {
         this.components = components;
     }
 

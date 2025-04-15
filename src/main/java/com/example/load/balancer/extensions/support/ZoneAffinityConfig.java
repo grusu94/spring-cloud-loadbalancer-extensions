@@ -47,11 +47,11 @@ public class ZoneAffinityConfig extends RuleBaseConfig {
      * @return the zone affinity rule.
      */
     @Bean
-    public CompositeStrategy zoneAffinity(PredicateBasedRuleSupport rule) {
+    public CompositeStrategyMatch zoneAffinity(PredicateBasedRuleSupport rule) {
         AvailabilityMatch availabilityMatch = new AvailabilityMatch();
         ZoneAvoidanceMatch zoneAvoidanceMatch = new ZoneAvoidanceMatch(0.8);
         ZoneAffinityMatch zoneAffinityMatcher = new ZoneAffinityMatch(getEurekaInstanceProperties().getZone());
-        CompositeStrategy predicate = withPredicates(zoneAffinityMatcher)
+        CompositeStrategyMatch predicate = withPredicates(zoneAffinityMatcher)
                 .addFallbackPredicate(withPredicates(zoneAvoidanceMatch, availabilityMatch).build())
                 .addFallbackPredicate(availabilityMatch)
                 .addFallbackPredicate(new AlwaysTrueStrategy())

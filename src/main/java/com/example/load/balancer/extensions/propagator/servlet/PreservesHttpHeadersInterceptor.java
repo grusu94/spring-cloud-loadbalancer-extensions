@@ -4,13 +4,19 @@ import com.example.load.balancer.extensions.context.ExecutionContext;
 import com.example.load.balancer.extensions.propagator.Filter;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import reactor.core.publisher.Mono;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
+import java.util.Set;
 
 import static com.example.load.balancer.extensions.context.ExecutionContextHolder.current;
 import static com.example.load.balancer.extensions.context.ExecutionContextHolder.remove;
@@ -23,7 +29,7 @@ import static java.util.Collections.list;
  */
 @Component
 @Slf4j
-public class PreservesHttpHeadersInterceptor implements HandlerInterceptor {
+public class PreservesHttpHeadersInterceptor implements GlobalFilter {
     /**
      * The request header names filter
      */
@@ -38,50 +44,22 @@ public class PreservesHttpHeadersInterceptor implements HandlerInterceptor {
         this.filter = filter;
     }
 
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response,
-                             Object handler) throws Exception {
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         try {
             ExecutionContext context = current();
-            Enumeration<String> headerNames = request.getHeaderNames();
-            if (headerNames != null) {
-                list(headerNames)
-                        .stream()
-                        .filter(filter::accept)
-                        .forEach(x -> context.put(x, request.getHeader(x)));
-            }
-            log.trace("Propagated inbound headers {} from url=[{}].", context.entrySet(), request.getRequestURL());
+            HttpHeaders headers = exchange.getRequest().getHeaders();
+            headers.keySet()
+                    .stream()
+                    .filter(filter::accept)
+                    .forEach(x -> context.put(x, headers.getFirst(x)));
+            log.trace("Propagated inbound headers {} from url=[{}].", context.entrySet(), exchange.getRequest().getURI());
         } catch (Exception e) {
             log.debug("Failed to propagate http request header.", e);
         }
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void postHandle(HttpServletRequest request,
-                           HttpServletResponse response,
-                           Object handler,
-                           ModelAndView modelAndView) throws Exception {
-        //nothing to do at this stage
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void afterCompletion(HttpServletRequest request,
-                                HttpServletResponse response,
-                                Object handler,
-                                Exception ex) throws Exception {
-        //clean up thread local
-        remove();
+        return chain.filter(exchange).doFinally(signalType -> {
+            remove();
+            log.trace("Context cleaned up after: {}.", signalType);
+        });
     }
 }

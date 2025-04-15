@@ -18,8 +18,8 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnClass(Feign.class)
-@ConditionalOnProperty(value = "ribbon.extensions.propagation.feign.enabled", matchIfMissing = true)
-@ConditionalOnExpression(value = "${ribbon.extensions.propagation.enabled:true}")
+@ConditionalOnProperty(value = "loadbalancer.extensions.propagation.feign.enabled", matchIfMissing = true)
+@ConditionalOnExpression(value = "${loadbalancer.extensions.propagation.enabled:true}")
 @Slf4j
 public class PreservesHttpHeadersFeignStrategy {
     @Autowired

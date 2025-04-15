@@ -5,6 +5,7 @@ import com.example.load.balancer.extensions.support.PropagationProperties;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -23,12 +24,11 @@ import java.util.concurrent.ScheduledExecutorService;
  * <p>Support for java and spring executor: requires however that your dependency injection is base on the interface and not the implementation.
  */
 @Configuration
-@ConditionalOnProperty(value = "ribbon.extensions.propagation.executor.enabled", matchIfMissing = true)
-@ConditionalOnExpression(value = "${ribbon.extensions.propagation.enabled:true}")
+@ConditionalOnProperty(value = "loadbalancer.extensions.propagation.executor.enabled", matchIfMissing = true)
+@ConditionalOnExpression(value = "${loadbalancer.extensions.propagation.enabled:true}")
 @Slf4j
-public class PreservesExecutionContextExecutorStrategy extends InstantiationAwareBeanPostProcessorAdapter {
+public class PreservesExecutionContextExecutorStrategy implements InstantiationAwareBeanPostProcessor {
     @Autowired
-    @Setter
     private PropagationProperties properties;
 
     /**

@@ -9,17 +9,16 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Default inbound http request propagation strategy based on http request headers copy to the execution context.
  */
 @Configuration
 @ConditionalOnWebApplication
-@ConditionalOnProperty(value = "ribbon.extensions.propagation.http.enabled", matchIfMissing = true)
-@ConditionalOnExpression(value = "${ribbon.extensions.propagation.enabled:true}")
+@ConditionalOnProperty(value = "loadbalancer.extensions.propagation.http.enabled", matchIfMissing = true)
+@ConditionalOnExpression(value = "${loadbalancer.extensions.propagation.enabled:true}")
 @Slf4j
-public class PreservesHeadersInboundHttpRequestStrategy implements WebMvcConfigurer {
+public class PreservesHeadersInboundHttpRequestStrategy {
     @Autowired
     private PropagationProperties properties;
 

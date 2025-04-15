@@ -6,6 +6,7 @@ import com.example.load.balancer.extensions.support.EurekaInstanceProperties;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
@@ -21,17 +22,12 @@ import org.springframework.messaging.simp.stomp.StompSession;
 @ConditionalOnProperty(value = "ribbon.extensions.propagation.stomp.enabled", matchIfMissing = true)
 @ConditionalOnExpression(value = "${ribbon.extensions.propagation.enabled:true}")
 @Slf4j
-public class PreservesStompHeadersStrategy extends InstantiationAwareBeanPostProcessorAdapter {
+public class PreservesStompHeadersStrategy implements InstantiationAwareBeanPostProcessor {
     @Autowired
-    @Setter
     private PropagationProperties propagationProperties;
     @Autowired
-    @Setter
     private EurekaInstanceProperties eurekaInstanceProperties;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) {
         if (bean instanceof StompSession && !(bean instanceof PreservesHeadersStompSessionAdapter)) {

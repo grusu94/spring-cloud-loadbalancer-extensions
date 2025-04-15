@@ -63,9 +63,9 @@ public class FavoriteZoneConfig extends RuleBaseConfig {
      */
 
     @Bean
-    public CompositeStrategy favoriteZone(PredicateBasedRuleSupport rule,
-                                          FavoriteZoneProperties favoriteZoneProperties,
-                                          PropagationProperties propagationProperties) {
+    public CompositeStrategyMatch favoriteZone(PredicateBasedRuleSupport rule,
+                                               FavoriteZoneProperties favoriteZoneProperties,
+                                               PropagationProperties propagationProperties) {
         AvailabilityMatch availabilityMatch = new AvailabilityMatch();
         ZoneAvoidanceMatch zoneAvoidanceMatch = new ZoneAvoidanceMatch(0.8);
         ZoneAffinityMatch zoneAffinityMatch = new ZoneAffinityMatch(getEurekaInstanceProperties().getZone());
@@ -80,7 +80,7 @@ public class FavoriteZoneConfig extends RuleBaseConfig {
         ZoneAffinityMatch fallbackZoneMatcher = new ZoneAffinityMatch(favoriteZoneProperties.getFallback());
         builder.addFallbackPredicate(fallbackZoneMatcher);
         favoriteZoneDescription.fallback(from(fallbackZoneMatcher));
-        CompositeStrategy favoriteZonePredicate = builder
+        CompositeStrategyMatch favoriteZonePredicate = builder
                 .addFallbackPredicate(withPredicates(zoneAvoidanceMatch, availabilityMatch).build())
                 .addFallbackPredicate(availabilityMatch)
                 .addFallbackPredicate(new AlwaysTrueStrategy())

@@ -1,14 +1,14 @@
 package com.example.load.balancer.extensions.support.strategy;
 
-import com.example.load.balancer.extensions.propagator.jms.PreservesMessagePropertiesConnectionFactoryAdapter;
-import com.example.load.balancer.extensions.support.PropagationProperties;
 import com.example.load.balancer.extensions.propagator.jms.MessagePropertyEncoder;
+import com.example.load.balancer.extensions.propagator.jms.PreservesMessagePropertiesConnectionFactoryAdapter;
 import com.example.load.balancer.extensions.support.EurekaInstanceProperties;
+import com.example.load.balancer.extensions.support.PropagationProperties;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
+import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -21,15 +21,13 @@ import javax.jms.ConnectionFactory;
  */
 @Configuration
 @ConditionalOnClass(PreservesMessagePropertiesConnectionFactoryAdapter.class)
-@ConditionalOnProperty(value = "ribbon.extensions.propagation.jms.enabled", matchIfMissing = true)
-@ConditionalOnExpression(value = "${ribbon.extensions.propagation.enabled:true}")
+@ConditionalOnProperty(value = "loadbalancer.extensions.propagation.jms.enabled", matchIfMissing = true)
+@ConditionalOnExpression(value = "${loadbalancer.extensions.propagation.enabled:true}")
 @Slf4j
-public class PreservesJmsMessagePropertiesStrategy extends InstantiationAwareBeanPostProcessorAdapter {
+public class PreservesJmsMessagePropertiesStrategy implements InstantiationAwareBeanPostProcessor {
     @Autowired
-    @Setter
     private PropagationProperties properties;
     @Autowired
-    @Setter
     private EurekaInstanceProperties eurekaInstanceProperties;
 
     @Value("${ribbon.extensions.propagation.jms.encoder:com.github.enadim.spring.cloud.ribbon.propagator.jms.SimpleMessagePropertyEncoder}")
@@ -49,9 +47,6 @@ public class PreservesJmsMessagePropertiesStrategy extends InstantiationAwareBea
         return encoder;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) {
         if (bean instanceof ConnectionFactory && !(bean instanceof PreservesMessagePropertiesConnectionFactoryAdapter)) {
