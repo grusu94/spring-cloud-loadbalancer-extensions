@@ -28,7 +28,7 @@ public class ExecutionContextPropagationImport implements ImportSelector {
     /**
      * class name separators
      */
-    private static final List<String> ATTRIBUTES = asList("inboundHttpRequest", "feign", "executor", "zuul", "hystrix", "jms", "stomp");
+    private static final List<String> ATTRIBUTES = asList("inboundHttpRequest", "feign", "executor", "gateway", "jms", "stomp");
 
     /**
      * {@inheritDoc}

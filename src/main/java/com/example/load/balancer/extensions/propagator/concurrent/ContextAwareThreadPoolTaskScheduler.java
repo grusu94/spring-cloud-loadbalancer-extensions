@@ -23,7 +23,7 @@ public class ContextAwareThreadPoolTaskScheduler extends ContextAwareThreadPoolT
     private final ContextAwareTaskScheduler executionContextAwareTaskScheduler;
 
     /**
-     * Sole Constructor.
+     * Constructor.
      *
      * @param asyncListenableTaskExecutor The delegate async listenable task executor.
      * @param schedulingTaskExecutor      The delegate scheduling task executor.

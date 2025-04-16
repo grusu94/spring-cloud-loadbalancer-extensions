@@ -21,7 +21,7 @@ public class ContextAwareScheduledExecutorService extends ContextAwareExecutorSe
     private final ScheduledExecutorService delegate;
 
     /**
-     * Sole Constructor.
+     * Constructor.
      *
      * @param delegate the delegate scheduled executor service.
      */

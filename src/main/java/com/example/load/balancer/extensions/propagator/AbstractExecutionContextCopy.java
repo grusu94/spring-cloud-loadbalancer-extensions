@@ -38,7 +38,7 @@ public class AbstractExecutionContextCopy<T> {
     private final Map<String, String> extraStaticEntries;
 
     /**
-     * Sole Constructor.
+     * Constructor.
      *
      * @param filter                       the context entry key filter
      * @param executionContextCopyFunction the execution context copy function.

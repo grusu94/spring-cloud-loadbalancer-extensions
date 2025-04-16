@@ -1,9 +1,11 @@
-package com.example.load.balancer.extensions.propagator.zuul;
+package com.example.load.balancer.extensions.propagator.gateway;
 
 import com.example.load.balancer.extensions.propagator.Filter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.core.Ordered;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -17,9 +19,9 @@ import java.util.Map.Entry;
 /**
  * Gateway headers enricher.
  */
-@Component
+@Component("httpHeadersEnricher")
 @Slf4j
-public class GatewayHeadersEnricher implements GatewayFilter {
+public class GatewayHeadersEnricher implements GlobalFilter, Ordered {
 
     /**
      * The extra headers to propagate.
@@ -61,5 +63,10 @@ public class GatewayHeadersEnricher implements GatewayFilter {
         log.trace("Propagated extra headers {}.", result);
 
         return chain.filter(mutatedExchange);
+    }
+
+    @Override
+    public int getOrder() {
+        return 5;
     }
 }

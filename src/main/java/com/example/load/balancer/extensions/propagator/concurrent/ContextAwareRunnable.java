@@ -21,7 +21,7 @@ public class ContextAwareRunnable implements Runnable {
     private final ExecutionContext context;
 
     /**
-     * Sole constructor: saves the current {@link ExecutionContext} for later {@link #run()} invocation.
+     * constructor: saves the current {@link ExecutionContext} for later {@link #run()} invocation.
      *
      * @param delegate the delegate {@link Runnable}
      */

@@ -20,7 +20,7 @@ public class ContextAwareAsyncTaskExecutor extends ContextAwareExecutor implemen
 
 
     /**
-     * Sole Constructor.
+     * Constructor.
      *
      * @param delegate the delegate async task executor..
      */

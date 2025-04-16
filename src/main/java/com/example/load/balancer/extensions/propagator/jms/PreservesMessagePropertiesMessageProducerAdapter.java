@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Message producer adapter that copies the current {@link ExecutionContext} to the message propagationProperties pre-filtering entry keys using the provided {@link #filter}.
+ * Message producer adapter that copies the current {@link ExecutionContext} to the message propagationProperties pre-filtering entry keys using the provided.
  *
  * @author Nadim Benabdenbi
  */
@@ -23,7 +23,7 @@ public class PreservesMessagePropertiesMessageProducerAdapter extends AbstractEx
     private final MessageProducer delegate;
 
     /**
-     * Sole constructor.
+     * constructor.
      *
      * @param delegate           the delegate message producer.
      * @param keysToPropagate    the context entry key filter.

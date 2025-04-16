@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -27,16 +28,16 @@ import static java.util.Collections.list;
  *
  * @author Nadim Benabdenbi
  */
-@Component
+@Component("httpHeadersToContext")
 @Slf4j
-public class PreservesHttpHeadersInterceptor implements GlobalFilter {
+public class PreservesHttpHeadersInterceptor implements GlobalFilter, Ordered {
     /**
      * The request header names filter
      */
     private final Filter<String> filter;
 
     /**
-     * Sole Constructor.
+     * Constructor.
      *
      * @param filter The request header names filter.
      */
@@ -61,5 +62,10 @@ public class PreservesHttpHeadersInterceptor implements GlobalFilter {
             remove();
             log.trace("Context cleaned up after: {}.", signalType);
         });
+    }
+
+    @Override
+    public int getOrder() {
+        return 0;
     }
 }

@@ -22,7 +22,7 @@ public class ContextAwareExecutorService extends ContextAwareExecutor implements
     private final ExecutorService delegate;
 
     /**
-     * Sole Constructor
+     * Constructor
      *
      * @param delegate the delegate executor service.
      */

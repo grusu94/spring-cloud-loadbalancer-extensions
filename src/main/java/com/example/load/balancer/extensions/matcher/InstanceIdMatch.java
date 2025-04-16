@@ -16,7 +16,7 @@ public class InstanceIdMatch implements LoadBalancingStrategy {
     private final String expectedInstanceId;
 
     /**
-     * Sole constructor.
+     * constructor.
      *
      * @param expectedInstanceId The expected instance id to match.
      */

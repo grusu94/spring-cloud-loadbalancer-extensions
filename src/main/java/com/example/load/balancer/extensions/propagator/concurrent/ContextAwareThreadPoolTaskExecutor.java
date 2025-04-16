@@ -41,7 +41,7 @@ public class ContextAwareThreadPoolTaskExecutor implements AsyncListenableTaskEx
     private final ContextAwareSchedulingTaskExecutor schedulingTaskExecutorPropagator;
 
     /**
-     * Sole Constructor.
+     * Constructor.
      *
      * @param asyncListenableTaskExecutor The delegate async listenable task executor.
      * @param schedulingTaskExecutor      The delegate scheduling task executor.

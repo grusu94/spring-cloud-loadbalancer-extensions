@@ -26,7 +26,7 @@ public class ContextAwareCallable<T> implements Callable<T> {
     private final ExecutionContext context;
 
     /**
-     * Sole Constructor: saves the current {@link ExecutionContext} for later {@link #call()} invocation.
+     * Constructor: saves the current {@link ExecutionContext} for later {@link #call()} invocation.
      *
      * @param delegate the delegate {@link Callable}
      */

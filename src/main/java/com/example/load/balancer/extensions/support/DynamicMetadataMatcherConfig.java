@@ -1,7 +1,6 @@
 package com.example.load.balancer.extensions.support;
 
 import com.example.load.balancer.extensions.matcher.DynamicMetadataMatch;
-import com.example.load.balancer.extensions.rule.PredicateBasedRuleSupport;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;

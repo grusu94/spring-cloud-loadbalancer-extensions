@@ -17,7 +17,7 @@ public class ContextAwareSchedulingTaskExecutor extends ContextAwareAsyncTaskExe
 
 
     /**
-     * Sole Constructor
+     * Constructor
      *
      * @param delegate the delegate scheduling task executor.
      */

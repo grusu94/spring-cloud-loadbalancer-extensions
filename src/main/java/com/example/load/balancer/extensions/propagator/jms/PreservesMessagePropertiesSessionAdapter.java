@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * Session adapter that preserves the {@link ExecutionContext} by copying message propagationProperties from/to the current {@link ExecutionContext} entry pre-filtering property names or entry keys using the provided {@link #filter}.
+ * Session adapter that preserves the {@link ExecutionContext} by copying message propagationProperties from/to the current {@link ExecutionContext} entry pre-filtering property names or entry keys using the provided.
  *
  * @author Nadim Benabdenbi
  */
@@ -31,7 +31,7 @@ public class PreservesMessagePropertiesSessionAdapter extends AbstractExecutionC
     private final MessagePropertyEncoder encoder;
 
     /**
-     * Sole Constructor
+     * Constructor
      *
      * @param delegate           the delegate session
      * @param filter             the context entry key filter

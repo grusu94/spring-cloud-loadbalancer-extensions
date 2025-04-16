@@ -25,7 +25,7 @@ public class PreservesHttpHeadersFeignInterceptor extends AbstractExecutionConte
     private final PatternFilter urlFilter;
 
     /**
-     * Sole constructor.
+     * constructor.
      *
      * @param urlFilter          The url filter.
      * @param filter             The context entry key filter.

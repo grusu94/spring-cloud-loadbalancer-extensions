@@ -2,7 +2,6 @@ package com.example.load.balancer.extensions.support;
 
 import com.example.load.balancer.extensions.matcher.*;
 import com.example.load.balancer.extensions.predicate.ZoneAffinityMatcher;
-import com.example.load.balancer.extensions.rule.PredicateBasedRuleSupport;
 import com.netflix.loadbalancer.AvailabilityPredicate;
 import com.netflix.loadbalancer.CompositePredicate;
 import com.netflix.loadbalancer.DynamicServerListLoadBalancer;

@@ -11,7 +11,7 @@ import javax.jms.MessageConsumer;
 import javax.jms.MessageListener;
 
 /**
- * Message consumer adapter that copies message propagationProperties to the current {@link ExecutionContext} pre-filtering property names using the provided {@link #filter}.
+ * Message consumer adapter that copies message propagationProperties to the current {@link ExecutionContext} pre-filtering property names using the provided.
  *
  * @author Nadim Benabdenbi
  */
@@ -23,7 +23,7 @@ public class PreservesMessagePropertiesMessageConsumerAdapter extends AbstractPr
     private final MessageConsumer delegate;
 
     /**
-     * Sole constructor.
+     * constructor.
      *
      * @param delegate the delegate message consumer.
      * @param filter   the message property name filter.

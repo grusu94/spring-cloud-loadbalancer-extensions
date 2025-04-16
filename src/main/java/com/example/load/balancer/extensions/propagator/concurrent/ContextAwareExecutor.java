@@ -18,7 +18,7 @@ public class ContextAwareExecutor implements Executor, TaskExecutor {
     private final Executor delegate;
 
     /**
-     * Sole Constructor.
+     * Constructor.
      *
      * @param delegate the delegate executor.
      */

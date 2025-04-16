@@ -17,7 +17,7 @@ public class DynamicZoneMatch implements LoadBalancingStrategy {
     private final String zoneEntryKey;
 
     /**
-     * Sole Constructor.
+     * Constructor.
      *
      * @param zoneEntryKey the favorite zone entry key.
      */

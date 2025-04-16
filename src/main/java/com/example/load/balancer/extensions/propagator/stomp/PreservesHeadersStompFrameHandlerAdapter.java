@@ -32,7 +32,7 @@ public class PreservesHeadersStompFrameHandlerAdapter implements StompFrameHandl
     private final Filter<String> filter;
 
     /**
-     * Sole constructor.
+     * constructor.
      *
      * @param delegate the delegate {@link StompFrameHandler}
      * @param filter   the stomp header names filter.

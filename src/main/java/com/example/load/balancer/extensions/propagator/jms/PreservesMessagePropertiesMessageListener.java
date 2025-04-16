@@ -9,7 +9,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 
 /**
- * Message listener adapter that copies message propagationProperties to the current {@link ExecutionContext} pre-filtering property names using the provided {@link #filter}.
+ * Message listener adapter that copies message propagationProperties to the current {@link ExecutionContext} pre-filtering property names using the provided.
  *
  * @author Nadim Benabdenbi
  */
@@ -21,7 +21,7 @@ public class PreservesMessagePropertiesMessageListener extends AbstractPreserves
     private final MessageListener delegate;
 
     /**
-     * Sole constructor.
+     * constructor.
      *
      * @param delegate the delegate {@link MessageListener}.
      * @param filter   the message property name filter.

@@ -4,8 +4,6 @@ import com.example.load.balancer.extensions.context.ExecutionContext;
 import com.example.load.balancer.extensions.matcher.*;
 import com.example.load.balancer.extensions.predicate.DynamicZoneMatcher;
 import com.example.load.balancer.extensions.predicate.ZoneAffinityMatcher;
-import com.example.load.balancer.extensions.rule.PredicateBasedRuleSupport;
-import com.example.load.balancer.extensions.rule.RuleDescription;
 import com.netflix.client.config.IClientConfig;
 import com.netflix.loadbalancer.AvailabilityPredicate;
 import com.netflix.loadbalancer.CompositePredicate;

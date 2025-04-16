@@ -14,7 +14,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * Stomp session adapter that preserves the {@link ExecutionContext} by copying stomp headers from/to the current {@link ExecutionContext} entry pre-filtering header names or entry keys using the provided {@link #filter}.
+ * Stomp session adapter that preserves the {@link ExecutionContext} by copying stomp headers from/to the current {@link ExecutionContext} entry pre-filtering header names or entry keys using the provided.
  */
 @Slf4j
 public class PreservesHeadersStompSessionAdapter extends AbstractExecutionContextCopy<StompHeaders> implements StompSession {
@@ -24,7 +24,7 @@ public class PreservesHeadersStompSessionAdapter extends AbstractExecutionContex
     private final StompSession delegate;
 
     /**
-     * Sole constructor.
+     * constructor.
      *
      * @param delegate           the delegate stomp session.
      * @param filter             the context entry key filter.

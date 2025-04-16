@@ -19,7 +19,7 @@ public class ContextAwareAsyncListenableTaskExecutor extends ContextAwareAsyncTa
     private final AsyncListenableTaskExecutor delegate;
 
     /**
-     * Sole Constructor
+     * Constructor
      *
      * @param delegate the delegate executor service.
      */

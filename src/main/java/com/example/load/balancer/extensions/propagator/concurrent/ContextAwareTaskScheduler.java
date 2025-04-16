@@ -21,7 +21,7 @@ public class ContextAwareTaskScheduler implements TaskScheduler {
     private final TaskScheduler delegate;
 
     /**
-     * Sole Constructor.
+     * Constructor.
      *
      * @param delegate the delegate task scheduler.
      */

@@ -20,7 +20,7 @@ public class SingleStaticMetadataMatch implements LoadBalancingStrategy {
     private final String entryValue;
 
     /**
-     * Sole constructor
+     * constructor
      *
      * @param entryKey   the attribute key to match.
      * @param entryValue the expected entry value
