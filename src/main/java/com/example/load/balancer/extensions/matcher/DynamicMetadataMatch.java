@@ -3,6 +3,7 @@ package com.example.load.balancer.extensions.matcher;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.cloud.client.ServiceInstance;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,14 +35,20 @@ public class DynamicMetadataMatch implements LoadBalancingStrategy {
 
     @Override
     public List<ServiceInstance> apply(List<ServiceInstance> instances) {
-        List<ServiceInstance> instanceList = null;
-        final String metadataValue = current().get(dynamicEntryKey);
-        if (metadataValue != null) {
-            instanceList = instances.stream()
-                    .filter(i -> metadataValue.equals(i.getMetadata().get(dynamicEntryKey)))
+        List<ServiceInstance> filteredInstances = new ArrayList<>();
+        final String metadataKey = current().get(dynamicEntryKey);
+        if (metadataKey != null) {
+            filteredInstances = instances.stream()
+                    .filter(i -> {
+                        String expected = current().get(metadataKey);
+                        String metadataValue = i.getMetadata().get(metadataKey);
+                        return (expected == null && metadataValue == null) || (expected != null && expected.equals(metadataValue));
+                    })
                     .collect(Collectors.toList());
+            return filteredInstances;
+        } else {
+            return matchIfMissing ? instances : filteredInstances;
         }
-        return instanceList == null || instanceList.isEmpty() ? instances : instanceList;
     }
 
     @Override

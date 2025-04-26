@@ -27,7 +27,7 @@ public class InstanceIdMatch implements LoadBalancingStrategy {
     @Override
     public List<ServiceInstance> apply(List<ServiceInstance> instances) {
         return instances.stream()
-                .filter(i -> expectedInstanceId.equals(i.getInstanceId()))
+                .filter(i -> expectedInstanceId != null && expectedInstanceId.equals(i.getInstanceId()))
                 .collect(Collectors.toList());
     }
 

@@ -9,7 +9,6 @@ import org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfigurati
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static com.example.load.balancer.extensions.rule.RuleDescription.from;
 import static com.example.load.balancer.extensions.support.RibbonExtensionsConstants.STRICT_METADATA_MATCHER_RULE_CLIENT_ENABLED_EXPRESSION;
 import static com.example.load.balancer.extensions.support.RibbonExtensionsConstants.STRICT_METADATA_MATCHER_RULE_ENABLED;
 
@@ -25,17 +24,14 @@ import static com.example.load.balancer.extensions.support.RibbonExtensionsConst
 @ConditionalOnProperty(value = STRICT_METADATA_MATCHER_RULE_ENABLED, matchIfMissing = true)
 @ConditionalOnExpression(value = STRICT_METADATA_MATCHER_RULE_CLIENT_ENABLED_EXPRESSION)
 @Slf4j
-public class StrictMetadataMatcherConfig extends RuleBaseConfig {
+public class StrictMetadataMatcherConfig {
 
     /**
-     * @param rule         the predicate rule support
      * @return an instance of {@link StrictMetadataMatch}
      */
     @Bean
-    public StrictMetadataMatch strictMetadataMatcher(PredicateBasedRuleSupport rule) {
+    public StrictMetadataMatch strictMetadataMatcher() {
         StrictMetadataMatch strictMetadataMatcher = new StrictMetadataMatch();
-        rule.setMatcher(strictMetadataMatcher);
-        rule.setDescription(from(strictMetadataMatcher));
         log.info("Strict metadata matcher enabled for client.");
         return strictMetadataMatcher;
     }

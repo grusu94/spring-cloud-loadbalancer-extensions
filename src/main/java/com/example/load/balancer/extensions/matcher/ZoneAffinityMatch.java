@@ -27,7 +27,7 @@ public class ZoneAffinityMatch implements LoadBalancingStrategy {
     @Override
     public List<ServiceInstance> apply(List<ServiceInstance> instances) {
         return instances.stream()
-                .filter(i -> zone.equals(i.getMetadata().get("zone")))
+                .filter(i -> zone != null && zone.equals(i.getMetadata().get("zone")))
                 .collect(Collectors.toList());
     }
 

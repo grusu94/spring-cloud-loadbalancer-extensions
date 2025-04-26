@@ -32,7 +32,7 @@ public class SingleStaticMetadataMatch implements LoadBalancingStrategy {
     @Override
     public List<ServiceInstance> apply(List<ServiceInstance> instances) {
         return instances.stream()
-                .filter(i -> entryValue.equals(i.getMetadata().get(entryKey)))
+                .filter(i -> entryValue != null && entryValue.equals(i.getMetadata().get(entryKey)))
                 .collect(Collectors.toList());
     }
 

@@ -10,8 +10,6 @@ import org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfigurati
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static com.example.load.balancer.extensions.rule.RuleDescription.from;
-
 /**
  * The dynamic attribute metadata matcher load balancing rule definition.
  * <p>Should not be imported directly for further compatibility reason: please use {@link EnableRibbonDynamicMetadataMatcher}.
@@ -24,7 +22,7 @@ import static com.example.load.balancer.extensions.rule.RuleDescription.from;
 @ConditionalOnProperty(value = RibbonExtensionsConstants.DYNAMIC_METADATA_MATCHER_RULE_ENABLED, matchIfMissing = true)
 @ConditionalOnExpression(value = RibbonExtensionsConstants.DYNAMIC_METADATA_MATCHER_RULE_CLIENT_ENABLED_EXPRESSION)
 @Slf4j
-public class DynamicMetadataMatcherConfig extends RuleBaseConfig {
+public class DynamicMetadataMatcherConfig {
 
     /**
      * The dynamic key
@@ -39,14 +37,11 @@ public class DynamicMetadataMatcherConfig extends RuleBaseConfig {
     private boolean matchIfMissing;
 
     /**
-     * @param rule         the predicate rule support.
      * @return an instance of {@link DynamicMetadataMatch}
      */
     @Bean
-    public DynamicMetadataMatch dynamicMetadataMatcher(PredicateBasedRuleSupport rule) {
+    public DynamicMetadataMatch dynamicMetadataMatcher() {
         DynamicMetadataMatch dynamicMetadataMatcher = new DynamicMetadataMatch(key, matchIfMissing);
-        rule.setMatcher(dynamicMetadataMatcher);
-        rule.setDescription(from(dynamicMetadataMatcher));
         log.info("Dynamic matcher rule enabled for client using dynamic key[{}].", key);
         return dynamicMetadataMatcher;
     }

@@ -30,7 +30,7 @@ public class DynamicZoneMatch implements LoadBalancingStrategy {
         final String zoneValue = current().get(zoneEntryKey);
 
         return instances.stream()
-                .filter(i -> zoneValue.equals(i.getMetadata().get("zone")))
+                .filter(i -> zoneValue != null && zoneValue.equals(i.getMetadata().get("zone")))
                 .collect(Collectors.toList());
     }
 

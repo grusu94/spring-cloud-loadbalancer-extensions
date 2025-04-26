@@ -29,7 +29,10 @@ public class SingleMetadataMatch implements LoadBalancingStrategy {
         final String metadataValue = current().get(metadataKey);
 
         return instances.stream()
-                .filter(i -> metadataValue != null && metadataValue.equals(i.getMetadata().get(metadataKey)))
+                .filter(i -> {
+                    String actual = i.getMetadata().get(metadataKey);
+                    return (metadataValue == null && actual == null) || (metadataValue != null && metadataValue.equals(actual));
+                })
                 .collect(Collectors.toList());
     }
 

@@ -19,7 +19,7 @@ public class StrictMetadataMatch implements LoadBalancingStrategy {
         if (entries == null) return Collections.emptyList();
 
         return instances.stream()
-                .filter(i -> entries.equals(i.getMetadata()))
+                .filter(i -> i.getMetadata().entrySet().containsAll(entries))
                 .collect(Collectors.toList());
     }
 
