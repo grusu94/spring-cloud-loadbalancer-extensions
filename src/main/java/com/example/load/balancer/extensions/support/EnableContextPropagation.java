@@ -79,13 +79,13 @@ public @interface EnableContextPropagation {
      */
     Class<?> executorStrategy() default PreservesExecutionContextExecutorStrategy.class;
 
-    /**
-     * default value is {@code true}.
-     *
-     * @return {@code true} when zuul propagation should be enabled otherwise {@code false}.
-     */
-    boolean zuul() default true;
-
+//    /**
+//     * default value is {@code true}.
+//     *
+//     * @return {@code true} when zuul propagation should be enabled otherwise {@code false}.
+//     */
+//    boolean zuul() default true;
+//
 //    /**
 //     * default is {@link PreservesHttpHeadersZuulStrategy}
 //     *
@@ -98,14 +98,14 @@ public @interface EnableContextPropagation {
      *
      * @return {@code true} when Hystrix propagation should be enabled otherwise {@code false}.
      */
-    boolean hystrix() default true;
+    boolean resilience4j() default true;
 
-//    /**
-//     * default strategy is {@link PreservesExecutionContextHystrixStrategy}
-//     *
-//     * @return the hystrix propagation strategy.
-//     */
-//    Class<?> hystrixStrategy() default PreservesExecutionContextHystrixStrategy.class;
+    /**
+     * default strategy is {@link PreservesExecutionContextResilience4jStrategy}
+     *
+     * @return the hystrix propagation strategy.
+     */
+    Class<?> resilience4jStrategy() default PreservesExecutionContextResilience4jStrategy.class;
 
     /**
      * default value is {@code true}.
