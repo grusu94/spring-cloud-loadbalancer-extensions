@@ -43,7 +43,7 @@ public class PreservesHttpHeadersFeignInterceptor extends AbstractExecutionConte
      */
     @Override
     public void apply(RequestTemplate template) {
-        String url = template.request().url();
+        String url = template.url();
         if (urlFilter.accept(url)) {
             Set<Entry<String, String>> propagatedAttributes = copy(template);
             log.trace("Propagated outbound headers {} for url [{}].", propagatedAttributes, url);
