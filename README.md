@@ -25,7 +25,7 @@ It comes with handy features for easy integration, configuration and customizati
 
 ## Compatibility:
 * Spring Cloud LoadBalancer (replaces Ribbon).
-* Spring Cloud Netlfix Eureka.
+* Spring Cloud Netflix Eureka.
 * Spring Cloud Gateway (replaces Zuul).
 * Spring Cloud Circuitbreaker Resilience4j (replaces Hystrix).
 * Spring Cloud Openfeign.
@@ -243,7 +243,7 @@ Maven
 ```xml
 <dependency>
   <groupId>com.example</groupId>
-  <artifactId>load-balancer-extensions</artifactId>
+  <artifactId>spring-cloud-loadbalancer-extensions</artifactId>
   <version>2.7.x</version>
 </dependency>
 ```

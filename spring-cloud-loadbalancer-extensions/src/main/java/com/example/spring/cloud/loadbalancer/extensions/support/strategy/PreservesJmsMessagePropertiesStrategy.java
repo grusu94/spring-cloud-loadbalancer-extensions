@@ -1,0 +1,74 @@
+package com.example.spring.cloud.loadbalancer.extensions.support.strategy;
+
+import com.example.spring.cloud.loadbalancer.extensions.propagator.jms.MessagePropertyEncoder;
+import com.example.spring.cloud.loadbalancer.extensions.propagator.jms.PreservesMessagePropertiesConnectionFactoryAdapter;
+import com.example.spring.cloud.loadbalancer.extensions.support.EurekaInstanceProperties;
+import com.example.spring.cloud.loadbalancer.extensions.support.PropagationProperties;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.lang.NonNull;
+
+import javax.jms.ConnectionFactory;
+import java.lang.reflect.InvocationTargetException;
+
+/**
+ * Default jms propagation strategy based on jms propagationProperties copy from/to the execution context.
+ */
+@Configuration
+@ConditionalOnClass(PreservesMessagePropertiesConnectionFactoryAdapter.class)
+@ConditionalOnProperty(value = "loadbalancer.extensions.propagation.jms.enabled", matchIfMissing = true)
+@ConditionalOnExpression(value = "${loadbalancer.extensions.propagation.enabled:true}")
+@Setter
+@Slf4j
+public class PreservesJmsMessagePropertiesStrategy implements InstantiationAwareBeanPostProcessor {
+
+    private PropagationProperties properties;
+    private EurekaInstanceProperties eurekaInstanceProperties;
+
+    public PreservesJmsMessagePropertiesStrategy(PropagationProperties properties, EurekaInstanceProperties eurekaInstanceProperties) {
+        this.properties = properties;
+        this.eurekaInstanceProperties = eurekaInstanceProperties;
+    }
+
+    @Value("${loadbalancer.extensions.propagation.jms.encoder:com.example.spring.cloud.loadbalancer.extensions.propagator.jms.SimpleMessagePropertyEncoder}")
+    private Class<? extends MessagePropertyEncoder> encoderType;
+
+    private MessagePropertyEncoder encoder = null;
+
+    private MessagePropertyEncoder getEncoder() {
+        if (encoder == null) {
+            try {
+                encoder = encoderType.getDeclaredConstructor().newInstance();
+            } catch (InstantiationException | IllegalAccessException e) {
+                throw new IllegalArgumentException("message property encoder '" + encoderType
+                        + "' should be accessible with a default constructor");
+            } catch (InvocationTargetException | NoSuchMethodException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return encoder;
+    }
+
+    @Override
+    public Object postProcessAfterInitialization(@NonNull Object bean, @NonNull String beanName) {
+        if (bean instanceof ConnectionFactory && !(bean instanceof PreservesMessagePropertiesConnectionFactoryAdapter)) {
+            if (properties.getJms().accept(beanName)) {
+                log.info("Context propagation ENABLED for jms connection factory [{}] on keys={}.", beanName,
+                        properties.getKeys());
+                return new PreservesMessagePropertiesConnectionFactoryAdapter((ConnectionFactory) bean,
+                        properties.buildEntriesFilter(),
+                        properties.buildExtraStaticEntries(eurekaInstanceProperties),
+                        getEncoder());
+            } else {
+                log.debug("Context propagation DISABLED for jms connection factory [{}]", beanName);
+            }
+        }
+        return bean;
+    }
+}
