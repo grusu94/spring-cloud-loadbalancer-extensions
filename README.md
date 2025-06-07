@@ -15,7 +15,7 @@
 ### Make sure service names and discovery configurations are consistent with the new setup.
 Enhance your microservice testing, maintenance & overall development productivity.
 
-**Onyx Load Balancer Extensions** is a set of load balancing rules that chooses which server to target.
+**Spring Cloud LoadBalancer Extensions** is a set of load balancing rules that chooses which server to target.
 It comes with handy features for easy integration, configuration and customization.
 
 ## Requirements 2.7.x:
@@ -69,7 +69,7 @@ loadbalancer.extensions.client.my-client-name.rule.zone-affinity.enabled=true
    1. Matches the favorite zone key against the target server zone using the dynamic zone matcher
    2. Matches the current service zone against the target server zone using the zone affinity matcher
    3. Matches the upstream zone key against the target server zone using the dynamic zone matcher
-   4. Applies the default load balancer zone avoidance predicate along with the availability predicate
+   4. Applies the default loadbalancer zone avoidance predicate along with the availability predicate
    5. Matches any server
  - Enables routing to a favorite zone: see the tests for concrete usage and configurations.
  - **Designed mainly for testing a microservice among an existing microservice architecture without disruption. This is the feature that triggered this project.**
