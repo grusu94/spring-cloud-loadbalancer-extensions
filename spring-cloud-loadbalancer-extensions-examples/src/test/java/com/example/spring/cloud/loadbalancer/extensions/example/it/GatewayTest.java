@@ -9,7 +9,7 @@ import static org.springframework.http.HttpStatus.OK;
 public class GatewayTest extends AbstractTest {
 
     public GatewayTest() {
-        super("service1", "zuul");
+        super("service1", "gateway");
         parrallelRunEnabled = false;
     }
 

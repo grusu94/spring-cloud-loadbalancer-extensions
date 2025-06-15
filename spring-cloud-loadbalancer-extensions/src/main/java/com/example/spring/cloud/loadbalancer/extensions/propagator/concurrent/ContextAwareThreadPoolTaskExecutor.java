@@ -40,7 +40,6 @@ public class ContextAwareThreadPoolTaskExecutor implements AsyncListenableTaskEx
      * {@inheritDoc}
      */
     @Override
-    @Deprecated
     public void execute(@NonNull Runnable task, long startTimeout) {
         schedulingTaskExecutorPropagator.execute(task, startTimeout);
     }

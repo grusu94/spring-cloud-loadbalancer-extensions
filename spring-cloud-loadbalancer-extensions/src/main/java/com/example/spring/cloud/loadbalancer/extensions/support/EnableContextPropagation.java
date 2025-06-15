@@ -80,7 +80,7 @@ public @interface EnableContextPropagation {
     /**
      * default value is {@code true}.
      *
-     * @return {@code true} when zuul propagation should be enabled otherwise {@code false}.
+     * @return {@code true} when gateway propagation should be enabled otherwise {@code false}.
      */
     boolean gateway() default true;
 

@@ -15,7 +15,7 @@ public class ThreadPoolTaskExecutionContextAwareExecutorTest extends AbstractExe
 
     @Test
     public void execute() {
-        propagator.execute(runnable);
+        propagator.execute(runnable, 1);
         verify(schedulingTaskExecutor).execute(any(ContextAwareRunnable.class));
     }
 

@@ -38,6 +38,6 @@ public class PreservesExecutionContextResilience4jStrategy {
      */
     public void init() {
         Resilience4jContextPlugin.register(new ExecutionContextAwareResilience4jStrategy());
-        log.info("Context propagation enabled for Resilience4j.");
+        log.info("Context propagation ENABLED for Resilience4j.");
     }
 }

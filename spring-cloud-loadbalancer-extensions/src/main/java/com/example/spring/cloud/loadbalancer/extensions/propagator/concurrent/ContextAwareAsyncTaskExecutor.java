@@ -31,9 +31,8 @@ public class ContextAwareAsyncTaskExecutor extends ContextAwareExecutor implemen
      * {@inheritDoc}
      */
     @Override
-    @Deprecated
     public final void execute(@NonNull Runnable task, long startTimeout) {
-        delegate.execute(ContextAwareRunnable.wrap(task), startTimeout);
+        delegate.execute(ContextAwareRunnable.wrap(task));
     }
 
     /**

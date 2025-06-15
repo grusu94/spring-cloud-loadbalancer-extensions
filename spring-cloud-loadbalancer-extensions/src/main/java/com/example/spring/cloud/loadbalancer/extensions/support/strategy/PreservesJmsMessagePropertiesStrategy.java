@@ -45,11 +45,8 @@ public class PreservesJmsMessagePropertiesStrategy implements InstantiationAware
         if (encoder == null) {
             try {
                 encoder = encoderType.getDeclaredConstructor().newInstance();
-            } catch (InstantiationException | IllegalAccessException e) {
-                throw new IllegalArgumentException("message property encoder '" + encoderType
-                        + "' should be accessible with a default constructor");
-            } catch (InvocationTargetException | NoSuchMethodException e) {
-                throw new RuntimeException(e);
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                throw new IllegalArgumentException("message property encoder '" + encoderType + "' should be accessible with a default constructor");
             }
         }
         return encoder;

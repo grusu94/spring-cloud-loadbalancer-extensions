@@ -16,9 +16,9 @@ public class CompositeStrategyMatcher implements LoadBalancingStrategyMatcher {
     public List<ServiceInstance> apply(List<ServiceInstance> instances) {
         List<ServiceInstance> result = instances;
         for (LoadBalancingStrategyMatcher strategy : components) {
-            result = strategy.apply(result);
+            result = strategy.apply(instances);
             if (!result.isEmpty()) {
-                break;
+                return result;
             }
         }
         return result;

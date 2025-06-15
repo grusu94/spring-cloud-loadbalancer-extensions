@@ -39,13 +39,13 @@ public class ExecutionContextHolderTest {
     }
 
     @Test
-    public void inheritance_works_when_creating_child_threads() throws Exception {
+    public void context_is_not_inherited_by_child_threads() throws Exception {
         String key = "key";
         String value = "value";
         current().put(key, value);
         ExecutorService executorService = newFixedThreadPool(1);
         Future<String> future = executorService.submit(() -> current().get(key));
-        assertThat(future.get(), is(value));
+        assertThat(future.get(), is(nullValue()));
     }
 
     @Test
