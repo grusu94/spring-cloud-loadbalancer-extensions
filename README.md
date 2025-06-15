@@ -19,7 +19,7 @@ Enhance your microservice testing, maintenance & overall development productivit
 It comes with handy features for easy integration, configuration and customization.
 
 ## Requirements 2.7.x:
-* Java: **11**
+* Java: **17**
 * Spring Boot: **2.7.x**
 * Spring Cloud: **2021.0.9**
 
@@ -242,7 +242,7 @@ Maven
 
 ```xml
 <dependency>
-  <groupId>com.example</groupId>
+  <groupId>com.github.grusu94</groupId>
   <artifactId>spring-cloud-loadbalancer-extensions</artifactId>
   <version>2.7.x</version>
 </dependency>
