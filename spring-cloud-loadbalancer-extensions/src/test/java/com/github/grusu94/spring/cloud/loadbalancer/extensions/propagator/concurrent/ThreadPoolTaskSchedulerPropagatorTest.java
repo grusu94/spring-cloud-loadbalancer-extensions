@@ -1,7 +1,6 @@
 package com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.concurrent;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.core.task.AsyncListenableTaskExecutor;
 import org.springframework.scheduling.SchedulingTaskExecutor;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.Trigger;
@@ -14,9 +13,8 @@ import static org.mockito.Mockito.verify;
 public class ThreadPoolTaskSchedulerPropagatorTest extends AbstractExecutionContextAwareExecutorTest {
     private final TaskScheduler taskScheduler = mock(TaskScheduler.class);
     private final SchedulingTaskExecutor schedulingTaskExecutor = mock(SchedulingTaskExecutor.class);
-    private final AsyncListenableTaskExecutor asyncListenableTaskExecutor = mock(AsyncListenableTaskExecutor.class);
     private final ContextAwareThreadPoolTaskScheduler propagator =
-            new ContextAwareThreadPoolTaskScheduler(asyncListenableTaskExecutor, schedulingTaskExecutor, taskScheduler);
+            new ContextAwareThreadPoolTaskScheduler(schedulingTaskExecutor, taskScheduler);
 
     @Test
     public void scheduleTrigger() {

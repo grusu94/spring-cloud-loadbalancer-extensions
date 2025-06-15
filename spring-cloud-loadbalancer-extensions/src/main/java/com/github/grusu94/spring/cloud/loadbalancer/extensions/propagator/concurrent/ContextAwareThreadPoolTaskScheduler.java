@@ -2,7 +2,6 @@ package com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.concu
 
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.ExecutionContext;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.core.task.AsyncListenableTaskExecutor;
 import org.springframework.lang.NonNull;
 import org.springframework.scheduling.SchedulingTaskExecutor;
 import org.springframework.scheduling.TaskScheduler;
@@ -13,8 +12,8 @@ import java.time.Instant;
 import java.util.concurrent.ScheduledFuture;
 
 /**
- * Copies current {@link ExecutionContext} to delegate composite scheduler of {@link AsyncListenableTaskExecutor}
- * and {@link SchedulingTaskExecutor} and {@link TaskScheduler}.
+ * Copies current {@link ExecutionContext} to delegate composite scheduler of {@link SchedulingTaskExecutor}
+ * and {@link TaskScheduler}.
  * <p>{@link org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler} use case.
  */
 public class ContextAwareThreadPoolTaskScheduler extends ContextAwareThreadPoolTaskExecutor
@@ -27,14 +26,12 @@ public class ContextAwareThreadPoolTaskScheduler extends ContextAwareThreadPoolT
     /**
      * Constructor.
      *
-     * @param asyncListenableTaskExecutor The delegate async listenable task executor.
      * @param schedulingTaskExecutor      The delegate scheduling task executor.
      * @param taskScheduler               the delegate task scheduler.
      */
-    public ContextAwareThreadPoolTaskScheduler(@NotNull AsyncListenableTaskExecutor asyncListenableTaskExecutor,
-                                               @NotNull SchedulingTaskExecutor schedulingTaskExecutor,
+    public ContextAwareThreadPoolTaskScheduler(@NotNull SchedulingTaskExecutor schedulingTaskExecutor,
                                                @NotNull TaskScheduler taskScheduler) {
-        super(asyncListenableTaskExecutor, schedulingTaskExecutor);
+        super(schedulingTaskExecutor);
         executionContextAwareTaskScheduler = new ContextAwareTaskScheduler(taskScheduler);
     }
 

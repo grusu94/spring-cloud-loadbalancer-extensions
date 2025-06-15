@@ -4,7 +4,6 @@ import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.concur
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.PropagationProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.task.AsyncListenableTaskExecutor;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.scheduling.SchedulingTaskExecutor;
 import org.springframework.scheduling.TaskScheduler;
@@ -52,8 +51,6 @@ public class PreservesExecutionContextExecutorStrategyTest {
                 equalTo(ContextAwareThreadPoolTaskExecutor.class));
         assertThat(processor.postProcessAfterInitialization(new ThreadPoolTaskScheduler(), beanName).getClass(),
                 equalTo(ContextAwareThreadPoolTaskScheduler.class));
-        assertThat(processor.postProcessAfterInitialization(mock(AsyncListenableTaskExecutor.class), beanName).getClass(),
-                equalTo(ContextAwareAsyncListenableTaskExecutor.class));
         assertThat(processor.postProcessAfterInitialization(mock(AsyncTaskExecutor.class), beanName).getClass(),
                 equalTo(ContextAwareAsyncTaskExecutor.class));
         assertThat(processor.postProcessAfterInitialization(mock(SchedulingTaskExecutor.class), beanName).getClass(),

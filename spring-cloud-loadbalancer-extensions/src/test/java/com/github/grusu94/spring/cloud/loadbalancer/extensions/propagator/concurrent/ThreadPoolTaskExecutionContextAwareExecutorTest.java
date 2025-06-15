@@ -1,7 +1,6 @@
 package com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.concurrent;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.core.task.AsyncListenableTaskExecutor;
 import org.springframework.scheduling.SchedulingTaskExecutor;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -10,8 +9,7 @@ import static org.mockito.Mockito.verify;
 
 public class ThreadPoolTaskExecutionContextAwareExecutorTest extends AbstractExecutionContextAwareExecutorTest {
     private final SchedulingTaskExecutor schedulingTaskExecutor = mock(SchedulingTaskExecutor.class);
-    private final AsyncListenableTaskExecutor asyncListenableTaskExecutor = mock(AsyncListenableTaskExecutor.class);
-    private final ContextAwareThreadPoolTaskExecutor propagator = new ContextAwareThreadPoolTaskExecutor(asyncListenableTaskExecutor, schedulingTaskExecutor);
+    private final ContextAwareThreadPoolTaskExecutor propagator = new ContextAwareThreadPoolTaskExecutor(schedulingTaskExecutor);
 
     @Test
     public void execute() {
@@ -40,18 +38,18 @@ public class ThreadPoolTaskExecutionContextAwareExecutorTest extends AbstractExe
     @Test
     public void execute1() {
         propagator.execute(runnable);
-        verify(asyncListenableTaskExecutor).execute(any(ContextAwareRunnable.class));
+        verify(schedulingTaskExecutor).execute(any(ContextAwareRunnable.class));
     }
 
     @Test
-    public void submitListenable() {
-        propagator.submitListenable(runnable);
-        verify(asyncListenableTaskExecutor).submitListenable(any(ContextAwareRunnable.class));
+    public void submitCompletableRunnable() {
+        propagator.submitCompletable(runnable);
+        verify(schedulingTaskExecutor).submitCompletable(any(ContextAwareRunnable.class));
     }
 
     @Test
-    public void submitListenable1() {
-        propagator.submitListenable(callable);
-        verify(asyncListenableTaskExecutor).submitListenable(any(ContextAwareCallable.class));
+    public void submitCompletableCallable() {
+        propagator.submitCompletable(callable);
+        verify(schedulingTaskExecutor).submitCompletable(any(ContextAwareCallable.class));
     }
 }

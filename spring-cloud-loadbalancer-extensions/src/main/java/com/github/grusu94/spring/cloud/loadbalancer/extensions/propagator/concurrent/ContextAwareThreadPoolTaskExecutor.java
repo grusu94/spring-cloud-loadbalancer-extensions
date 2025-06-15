@@ -2,23 +2,19 @@ package com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.concu
 
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.ExecutionContext;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.core.task.AsyncListenableTaskExecutor;
 import org.springframework.lang.NonNull;
 import org.springframework.scheduling.SchedulingTaskExecutor;
-import org.springframework.util.concurrent.ListenableFuture;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
 /**
- * Copies current {@link ExecutionContext} to delegate composite executor of {@link AsyncListenableTaskExecutor} and {@link SchedulingTaskExecutor}.
+ * Copies current {@link ExecutionContext} to delegate composite executor of {@link SchedulingTaskExecutor}.
  * <p>{@link org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor} use case.
  */
-public class ContextAwareThreadPoolTaskExecutor implements AsyncListenableTaskExecutor, SchedulingTaskExecutor {
-    /**
-     * The delegate async listenable task executor propagator.
-     */
-    private final ContextAwareAsyncListenableTaskExecutor asyncListenableTaskExecutorPropagator;
+public class ContextAwareThreadPoolTaskExecutor implements SchedulingTaskExecutor {
+
     /**
      * The delegate scheduling task executor propagator.
      */
@@ -27,12 +23,9 @@ public class ContextAwareThreadPoolTaskExecutor implements AsyncListenableTaskEx
     /**
      * Constructor.
      *
-     * @param asyncListenableTaskExecutor The delegate async listenable task executor.
      * @param schedulingTaskExecutor      The delegate scheduling task executor.
      */
-    public ContextAwareThreadPoolTaskExecutor(@NotNull AsyncListenableTaskExecutor asyncListenableTaskExecutor,
-                                              @NotNull SchedulingTaskExecutor schedulingTaskExecutor) {
-        asyncListenableTaskExecutorPropagator = new ContextAwareAsyncListenableTaskExecutor(asyncListenableTaskExecutor);
+    public ContextAwareThreadPoolTaskExecutor(@NotNull SchedulingTaskExecutor schedulingTaskExecutor) {
         schedulingTaskExecutorPropagator = new ContextAwareSchedulingTaskExecutor(schedulingTaskExecutor);
     }
 
@@ -76,7 +69,7 @@ public class ContextAwareThreadPoolTaskExecutor implements AsyncListenableTaskEx
     @Override
     @NonNull
     public void execute(@NonNull Runnable command) {
-        asyncListenableTaskExecutorPropagator.execute(command);
+        schedulingTaskExecutorPropagator.execute(command);
     }
 
     /**
@@ -84,8 +77,8 @@ public class ContextAwareThreadPoolTaskExecutor implements AsyncListenableTaskEx
      */
     @Override
     @NonNull
-    public ListenableFuture<?> submitListenable(@NonNull Runnable task) {
-        return asyncListenableTaskExecutorPropagator.submitListenable(task);
+    public CompletableFuture<Void> submitCompletable(@NonNull Runnable task) {
+        return schedulingTaskExecutorPropagator.submitCompletable(task);
     }
 
     /**
@@ -93,7 +86,7 @@ public class ContextAwareThreadPoolTaskExecutor implements AsyncListenableTaskEx
      */
     @Override
     @NonNull
-    public <T> ListenableFuture<T> submitListenable(@NonNull Callable<T> task) {
-        return asyncListenableTaskExecutorPropagator.submitListenable(task);
+    public <T> CompletableFuture<T> submitCompletable(@NonNull Callable<T> task) {
+        return schedulingTaskExecutorPropagator.submitCompletable(task);
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.lang.NonNull;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
 /**
@@ -51,5 +52,17 @@ public class ContextAwareAsyncTaskExecutor extends ContextAwareExecutor implemen
     @NonNull
     public final <T> Future<T> submit(@NonNull Callable<T> task) {
         return delegate.submit(ContextAwareCallable.wrap(task));
+    }
+
+    @Override
+    @NonNull
+    public CompletableFuture<Void> submitCompletable(@NonNull Runnable task) {
+        return delegate.submitCompletable(ContextAwareRunnable.wrap(task));
+    }
+
+    @Override
+    @NonNull
+    public <T> CompletableFuture<T> submitCompletable(@NonNull Callable<T> task) {
+        return delegate.submitCompletable(ContextAwareCallable.wrap(task));
     }
 }
