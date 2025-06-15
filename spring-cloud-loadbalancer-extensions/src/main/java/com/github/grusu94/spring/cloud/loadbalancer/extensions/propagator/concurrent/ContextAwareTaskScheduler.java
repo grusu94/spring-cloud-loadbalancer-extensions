@@ -6,7 +6,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.Trigger;
 
-import java.util.Date;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.concurrent.ScheduledFuture;
 
 /**
@@ -41,7 +42,7 @@ public class ContextAwareTaskScheduler implements TaskScheduler {
      */
     @Override
     @NonNull
-    public ScheduledFuture<?> schedule(@NonNull Runnable task, @NonNull Date startTime) {
+    public ScheduledFuture<?> schedule(@NonNull Runnable task, @NonNull Instant startTime) {
         return delegate.schedule(ContextAwareRunnable.wrap(task), startTime);
     }
 
@@ -50,8 +51,9 @@ public class ContextAwareTaskScheduler implements TaskScheduler {
      */
     @Override
     @NonNull
-    public ScheduledFuture<?> scheduleAtFixedRate(@NonNull Runnable task, @NonNull Date startTime,
-                                                  long period) {
+    public ScheduledFuture<?> scheduleAtFixedRate(@NonNull Runnable task,
+                                                  @NonNull Instant startTime,
+                                                  @NonNull Duration period) {
         return delegate.scheduleAtFixedRate(ContextAwareRunnable.wrap(task), startTime, period);
     }
 
@@ -60,7 +62,7 @@ public class ContextAwareTaskScheduler implements TaskScheduler {
      */
     @Override
     @NonNull
-    public ScheduledFuture<?> scheduleAtFixedRate(@NonNull Runnable task, long period) {
+    public ScheduledFuture<?> scheduleAtFixedRate(@NonNull Runnable task, @NonNull Duration period) {
         return delegate.scheduleAtFixedRate(ContextAwareRunnable.wrap(task), period);
     }
 
@@ -70,7 +72,8 @@ public class ContextAwareTaskScheduler implements TaskScheduler {
     @Override
     @NonNull
     public ScheduledFuture<?> scheduleWithFixedDelay(@NonNull Runnable task,
-                                                     @NonNull Date startTime, long delay) {
+                                                     @NonNull Instant startTime,
+                                                     @NonNull Duration delay) {
         return delegate.scheduleWithFixedDelay(ContextAwareRunnable.wrap(task), startTime, delay);
     }
 
@@ -79,7 +82,7 @@ public class ContextAwareTaskScheduler implements TaskScheduler {
      */
     @Override
     @NonNull
-    public ScheduledFuture<?> scheduleWithFixedDelay(@NonNull Runnable task, long delay) {
+    public ScheduledFuture<?> scheduleWithFixedDelay(@NonNull Runnable task, @NonNull Duration delay) {
         return delegate.scheduleWithFixedDelay(ContextAwareRunnable.wrap(task), delay);
     }
 }

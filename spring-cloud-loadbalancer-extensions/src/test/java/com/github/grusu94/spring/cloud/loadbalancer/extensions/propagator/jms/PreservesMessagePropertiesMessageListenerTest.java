@@ -2,8 +2,8 @@ package com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.jms;
 
 import org.junit.jupiter.api.Test;
 
-import javax.jms.Message;
-import javax.jms.MessageListener;
+import jakarta.jms.Message;
+import jakarta.jms.MessageListener;
 import java.util.Collections;
 
 import static org.mockito.Mockito.*;

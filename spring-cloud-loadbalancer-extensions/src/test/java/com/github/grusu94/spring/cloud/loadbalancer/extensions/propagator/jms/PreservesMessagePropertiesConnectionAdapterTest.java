@@ -2,7 +2,7 @@ package com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.jms;
 
 import org.junit.jupiter.api.Test;
 
-import javax.jms.Connection;
+import jakarta.jms.Connection;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

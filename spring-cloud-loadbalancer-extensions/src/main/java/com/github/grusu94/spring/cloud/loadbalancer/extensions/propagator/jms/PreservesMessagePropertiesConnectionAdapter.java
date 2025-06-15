@@ -4,7 +4,7 @@ import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.Execution
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.Filter;
 import lombok.AllArgsConstructor;
 
-import javax.jms.*;
+import jakarta.jms.*;
 import java.util.Map;
 
 /**

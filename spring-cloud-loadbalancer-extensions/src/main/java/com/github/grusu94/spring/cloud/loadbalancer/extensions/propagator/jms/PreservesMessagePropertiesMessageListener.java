@@ -5,8 +5,8 @@ import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.Filter
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.jms.Message;
-import javax.jms.MessageListener;
+import jakarta.jms.Message;
+import jakarta.jms.MessageListener;
 
 /**
  * Message listener adapter that copies message propagationProperties to the current {@link ExecutionContext}

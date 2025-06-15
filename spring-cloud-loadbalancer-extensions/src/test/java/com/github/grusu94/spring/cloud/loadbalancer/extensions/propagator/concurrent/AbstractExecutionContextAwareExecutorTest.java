@@ -3,7 +3,8 @@ package com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.concu
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.scheduling.Trigger;
 
-import java.util.Date;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
@@ -32,8 +33,8 @@ public abstract class AbstractExecutionContextAwareExecutorTest {
             throw new RuntimeException(e);
         }
     };
-    protected final long period = 1;
-    protected final Date date = new Date();
+    protected final Duration period = Duration.ofMillis(1);
+    protected final Instant date = Instant.now();
     protected final Trigger trigger = mock(Trigger.class);
 
     @AfterEach

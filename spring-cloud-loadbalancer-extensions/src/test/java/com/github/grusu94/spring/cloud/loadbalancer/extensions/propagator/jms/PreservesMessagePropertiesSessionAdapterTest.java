@@ -2,7 +2,7 @@ package com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.jms;
 
 import org.junit.jupiter.api.Test;
 
-import javax.jms.*;
+import jakarta.jms.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;

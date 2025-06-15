@@ -8,7 +8,8 @@ import org.springframework.scheduling.SchedulingTaskExecutor;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.Trigger;
 
-import java.util.Date;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.concurrent.ScheduledFuture;
 
 /**
@@ -50,7 +51,7 @@ public class ContextAwareThreadPoolTaskScheduler extends ContextAwareThreadPoolT
      */
     @Override
     @NonNull
-    public ScheduledFuture<?> schedule(@NonNull Runnable task, @NonNull Date startTime) {
+    public ScheduledFuture<?> schedule(@NonNull Runnable task, @NonNull Instant startTime) {
         return executionContextAwareTaskScheduler.schedule(task, startTime);
     }
 
@@ -60,7 +61,8 @@ public class ContextAwareThreadPoolTaskScheduler extends ContextAwareThreadPoolT
     @Override
     @NonNull
     public ScheduledFuture<?> scheduleAtFixedRate(@NonNull Runnable task,
-                                                  @NonNull Date startTime, long period) {
+                                                  @NonNull Instant startTime,
+                                                  @NonNull Duration period) {
         return executionContextAwareTaskScheduler.scheduleAtFixedRate(task, startTime, period);
     }
 
@@ -69,7 +71,7 @@ public class ContextAwareThreadPoolTaskScheduler extends ContextAwareThreadPoolT
      */
     @Override
     @NonNull
-    public ScheduledFuture<?> scheduleAtFixedRate(@NonNull Runnable task, long period) {
+    public ScheduledFuture<?> scheduleAtFixedRate(@NonNull Runnable task, @NonNull Duration period) {
         return executionContextAwareTaskScheduler.scheduleAtFixedRate(task, period);
     }
 
@@ -79,7 +81,8 @@ public class ContextAwareThreadPoolTaskScheduler extends ContextAwareThreadPoolT
     @Override
     @NonNull
     public ScheduledFuture<?> scheduleWithFixedDelay(@NonNull Runnable task,
-                                                     @NonNull Date startTime, long delay) {
+                                                     @NonNull Instant startTime,
+                                                     @NonNull Duration delay) {
         return executionContextAwareTaskScheduler.scheduleWithFixedDelay(task, startTime, delay);
     }
 
@@ -88,7 +91,7 @@ public class ContextAwareThreadPoolTaskScheduler extends ContextAwareThreadPoolT
      */
     @Override
     @NonNull
-    public ScheduledFuture<?> scheduleWithFixedDelay(@NonNull Runnable task, long delay) {
+    public ScheduledFuture<?> scheduleWithFixedDelay(@NonNull Runnable task, @NonNull Duration delay) {
         return executionContextAwareTaskScheduler.scheduleWithFixedDelay(task, delay);
     }
 }

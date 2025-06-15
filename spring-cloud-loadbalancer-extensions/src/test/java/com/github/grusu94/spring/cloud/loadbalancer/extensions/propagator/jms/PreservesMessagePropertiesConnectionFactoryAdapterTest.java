@@ -3,7 +3,7 @@ package com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.jms;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
-import javax.jms.ConnectionFactory;
+import jakarta.jms.ConnectionFactory;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;

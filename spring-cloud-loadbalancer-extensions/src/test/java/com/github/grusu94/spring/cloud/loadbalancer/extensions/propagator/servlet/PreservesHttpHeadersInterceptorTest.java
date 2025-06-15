@@ -3,7 +3,7 @@ package com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.servl
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.Set;
 

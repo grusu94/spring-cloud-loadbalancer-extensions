@@ -7,7 +7,7 @@ import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.EurekaIns
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.PropagationProperties;
 import org.junit.jupiter.api.Test;
 
-import javax.jms.ConnectionFactory;
+import jakarta.jms.ConnectionFactory;
 
 import static java.util.regex.Pattern.compile;
 import static org.hamcrest.MatcherAssert.assertThat;

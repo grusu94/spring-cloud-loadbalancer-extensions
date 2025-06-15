@@ -4,10 +4,10 @@ import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.Execution
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.Filter;
 import lombok.AllArgsConstructor;
 
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
-import javax.jms.JMSContext;
-import javax.jms.JMSException;
+import jakarta.jms.Connection;
+import jakarta.jms.ConnectionFactory;
+import jakarta.jms.JMSContext;
+import jakarta.jms.JMSException;
 import java.util.Map;
 
 /**

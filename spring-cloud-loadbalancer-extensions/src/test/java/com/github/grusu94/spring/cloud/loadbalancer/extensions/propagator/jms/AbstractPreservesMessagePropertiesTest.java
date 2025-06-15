@@ -3,8 +3,8 @@ package com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.jms;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;

@@ -6,7 +6,7 @@ import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.Filter
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.jms.*;
+import jakarta.jms.*;
 import java.util.Map;
 import java.util.Set;
 

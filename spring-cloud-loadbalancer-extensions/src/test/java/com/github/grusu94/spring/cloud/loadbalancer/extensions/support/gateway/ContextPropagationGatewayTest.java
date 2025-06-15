@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
