@@ -1,6 +1,6 @@
 # Replacement library for ribbon extensions
  - This library replaces the existing ribbon extensions project (https://github.com/enadim/spring-cloud-ribbon-extensions) which relied on the Netflix Ribbon client-side load balancer.
- - Works with newer spring boot versions (> 3.1.x).
+ - Works with newer spring boot versions (> 3.4.x).
  - **Important to keep updated this library while migrating to newer spring boot versions.**
 
 # Key Benefits:
@@ -18,9 +18,9 @@ Enhance your microservice testing, maintenance & overall development productivit
 **Spring Cloud LoadBalancer Extensions** is a set of load balancing rules that chooses which server to target.
 It comes with handy features for easy integration, configuration and customization.
 
-## Requirements 3.1.x:
+## Requirements 3.4.x:
 * Java: **17**
-* Spring Boot: **3.1.x**
+* Spring Boot: **3.4.x**
 * Spring Cloud: **2022.0.5**
 
 ## Compatibility:
@@ -244,6 +244,6 @@ Maven
 <dependency>
   <groupId>com.github.grusu94</groupId>
   <artifactId>spring-cloud-loadbalancer-extensions</artifactId>
-  <version>3.1.x</version>
+  <version>3.4.x</version>
 </dependency>
 ```

@@ -5,7 +5,7 @@
 
 	<groupId>com.github.grusu94</groupId>
 	<artifactId>spring-cloud-loadbalancer-extensions-parent</artifactId>
-	<version>3.1.0</version>
+	<version>3.4.0</version>
 	<packaging>pom</packaging>
 	<name>spring-cloud-loadbalancer-extensions</name>
 	<description>Spring Cloud LoadBalancer Extensions</description>
@@ -22,8 +22,8 @@
 		<maven-surefire-plugin-version>3.4.0</maven-surefire-plugin-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spotbugs-annotations-version>4.9.3</spotbugs-annotations-version>
-		<spring-boot-version>3.1.12</spring-boot-version>
-		<spring-cloud-version>2022.0.5</spring-cloud-version>
+		<spring-boot-version>3.4.6</spring-boot-version>
+		<spring-cloud-version>2024.0.1</spring-cloud-version>
 	</properties>
 
 	<dependencyManagement>
