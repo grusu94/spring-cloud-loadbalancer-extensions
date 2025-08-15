@@ -12,18 +12,17 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
                 "endpoints.enabled=false",
                 "eureka.client.enabled=false",
                 "spring.cloud.consul.enabled=false",
-                "loadbalancer.extensions.propagation.keys[0]=instance-id",
-                "loadbalancer.extensions.propagation.keys[1]=mykey",
-                "loadbalancer.extensions.client.application.rule.dynamic-metadata-matcher.key=mykey",
-                "loadbalancer.extensions.client.application.rule.dynamic-metadata-matcher.accept-when-missing=false",
+                "spring.cloud.consul.discovery.instance-zone=zone1",
+                "loadbalancer.extensions.propagation.keys[0]=dynamic-matcher-key",
+                "loadbalancer.extensions.propagation.keys[1]=instance-id",
                 "spring.main.web-application-type=servlet",
                 "spring.cloud.gateway.enabled=false",
                 "spring.cloud.loadbalancer.cache.enabled=false"
         }
 )
-public class DynamicMatcherClientConfigurationTest extends AbstractDynamicMatcherSupportTest {
-    public DynamicMatcherClientConfigurationTest() {
-        super("mykey", false);
+public class DynamicMatcherDefaultConfigurationConsulTest extends AbstractDynamicMatcherSupportTest {
+    public DynamicMatcherDefaultConfigurationConsulTest() {
+        super("dynamic-matcher-key", true);
     }
 
 }

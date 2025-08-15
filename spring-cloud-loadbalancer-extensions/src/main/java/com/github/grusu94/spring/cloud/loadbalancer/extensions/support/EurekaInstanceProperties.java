@@ -17,7 +17,7 @@ import static com.github.grusu94.spring.cloud.loadbalancer.extensions.support.Lo
 @Component
 @Getter
 @Setter
-public class EurekaInstanceProperties {
+public class EurekaInstanceProperties implements InstanceProperties {
     /**
      * the eureka client meta data
      */
@@ -26,6 +26,7 @@ public class EurekaInstanceProperties {
     /**
      * @return the eureka client instance id
      */
+    @Override
     public String getInstanceId() {
         return metadataMap.get(EUREKA_INSTANCE_ID);
     }
@@ -33,6 +34,7 @@ public class EurekaInstanceProperties {
     /**
      * @return the eureka client zone
      */
+    @Override
     public String getZone() {
         return metadataMap.getOrDefault(EUREKA_ZONE_PROPERTY, DEFAULT_EUREKA_ZONE);
     }

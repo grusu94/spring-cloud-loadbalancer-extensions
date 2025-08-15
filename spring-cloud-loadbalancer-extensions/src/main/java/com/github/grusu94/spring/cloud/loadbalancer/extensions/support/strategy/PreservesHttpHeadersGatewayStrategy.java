@@ -2,7 +2,7 @@ package com.github.grusu94.spring.cloud.loadbalancer.extensions.support.strategy
 
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.gateway.GatewayHeadersEnricher;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.gateway.PreservesGatewayHttpHeadersInterceptor;
-import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.EurekaInstanceProperties;
+import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.InstanceProperties;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.PropagationProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
@@ -20,11 +20,11 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 public class PreservesHttpHeadersGatewayStrategy {
     private final PropagationProperties properties;
-    private final EurekaInstanceProperties eurekaInstanceProperties;
+    private final InstanceProperties instanceProperties;
 
-    public PreservesHttpHeadersGatewayStrategy(PropagationProperties properties, EurekaInstanceProperties eurekaInstanceProperties) {
+    public PreservesHttpHeadersGatewayStrategy(PropagationProperties properties, InstanceProperties instanceProperties) {
         this.properties = properties;
-        this.eurekaInstanceProperties = eurekaInstanceProperties;
+        this.instanceProperties = instanceProperties;
     }
 
     @Bean
@@ -37,6 +37,6 @@ public class PreservesHttpHeadersGatewayStrategy {
     public GlobalFilter httpHeadersEnricher() {
         log.info("Context propagation ENABLED for gateway enricher (GatewayStrategy) on keys={}.", properties.getKeys());
         return new GatewayHeadersEnricher(properties.buildEntriesFilter(),
-                properties.buildExtraStaticEntries(eurekaInstanceProperties));
+                properties.buildExtraStaticEntries(instanceProperties));
     }
 }

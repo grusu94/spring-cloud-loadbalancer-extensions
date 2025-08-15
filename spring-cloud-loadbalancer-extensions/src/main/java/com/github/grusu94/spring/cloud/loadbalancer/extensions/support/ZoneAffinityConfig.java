@@ -33,14 +33,14 @@ public class ZoneAffinityConfig {
      */
     @Bean
     public ServiceInstanceListSupplier zoneAffinity(ConfigurableApplicationContext context,
-                                                    EurekaInstanceProperties eurekaInstanceProperties) {
+                                                    InstanceProperties instanceProperties) {
 
         final ServiceInstanceListSupplier delegate = ServiceInstanceListSupplier.builder()
                 .withDiscoveryClient()
                 .build(context);
 
         final CompositeStrategyMatcher compositeStrategyMatcher = new CompositeStrategyMatcher(List.of(
-           new ZoneAffinityMatcher(eurekaInstanceProperties.getZone()),
+           new ZoneAffinityMatcher(instanceProperties.getZone()),
            new ZoneAvoidanceMatcher(0.8),
            new AvailabilityMatcher()
         ));

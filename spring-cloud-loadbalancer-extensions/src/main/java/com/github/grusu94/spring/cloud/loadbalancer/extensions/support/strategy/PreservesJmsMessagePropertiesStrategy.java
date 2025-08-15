@@ -2,7 +2,7 @@ package com.github.grusu94.spring.cloud.loadbalancer.extensions.support.strategy
 
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.jms.MessagePropertyEncoder;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.jms.PreservesMessagePropertiesConnectionFactoryAdapter;
-import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.EurekaInstanceProperties;
+import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.InstanceProperties;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.PropagationProperties;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -29,11 +29,11 @@ import java.lang.reflect.InvocationTargetException;
 public class PreservesJmsMessagePropertiesStrategy implements InstantiationAwareBeanPostProcessor {
 
     private PropagationProperties properties;
-    private EurekaInstanceProperties eurekaInstanceProperties;
+    private InstanceProperties instanceProperties;
 
-    public PreservesJmsMessagePropertiesStrategy(PropagationProperties properties, EurekaInstanceProperties eurekaInstanceProperties) {
+    public PreservesJmsMessagePropertiesStrategy(PropagationProperties properties, InstanceProperties instanceProperties) {
         this.properties = properties;
-        this.eurekaInstanceProperties = eurekaInstanceProperties;
+        this.instanceProperties = instanceProperties;
     }
 
     @Value("${loadbalancer.extensions.propagation.jms.encoder:com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.jms.SimpleMessagePropertyEncoder}")
@@ -60,7 +60,7 @@ public class PreservesJmsMessagePropertiesStrategy implements InstantiationAware
                         properties.getKeys());
                 return new PreservesMessagePropertiesConnectionFactoryAdapter((ConnectionFactory) bean,
                         properties.buildEntriesFilter(),
-                        properties.buildExtraStaticEntries(eurekaInstanceProperties),
+                        properties.buildExtraStaticEntries(instanceProperties),
                         getEncoder());
             } else {
                 log.debug("Context propagation DISABLED for jms connection factory [{}]", beanName);
