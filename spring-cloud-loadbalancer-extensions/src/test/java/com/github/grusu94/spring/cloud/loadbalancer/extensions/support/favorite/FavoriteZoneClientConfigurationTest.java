@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
                 "spring.application.name=favorite-zone-test",
                 "endpoints.enabled=false",
                 "eureka.client.enabled=false",
+                "spring.cloud.consul.enabled=false",
                 "eureka.instance.metadataMap.zone=zone1",
                 "loadbalancer.extensions.propagation.keys[0]=my-favorite-zone",
                 "loadbalancer.extensions.rule.favorite-zone.key=my-favorite-zone",
