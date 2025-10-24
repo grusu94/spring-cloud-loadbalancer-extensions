@@ -36,6 +36,7 @@ public abstract class AbstractTest {
     private int getApplicationPort(String name) {
         return switch (name) {
             case "eureka" -> 8000;
+            case "consul" -> 8500;
             case "gateway" -> 8001;
             case "service1-zone1" -> 8011;
             case "service1-zone2" -> 8012;

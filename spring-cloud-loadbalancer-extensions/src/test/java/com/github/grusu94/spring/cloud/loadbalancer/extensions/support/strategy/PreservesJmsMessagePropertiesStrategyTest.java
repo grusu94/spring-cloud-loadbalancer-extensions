@@ -38,7 +38,7 @@ public class PreservesJmsMessagePropertiesStrategyTest {
     public void should_decorate() {
         processor.setEncoderType(EchoMessagePropertyEncoder.class);
         processor.setProperties(new PropagationProperties());
-        processor.setEurekaInstanceProperties(new EurekaInstanceProperties());
+        processor.setInstanceProperties(new EurekaInstanceProperties());
         assertThat(processor.postProcessAfterInitialization(mock(ConnectionFactory.class), beanName).getClass(), equalTo(PreservesMessagePropertiesConnectionFactoryAdapter.class));
         processor.postProcessAfterInitialization(mock(ConnectionFactory.class), beanName);
     }
@@ -49,7 +49,7 @@ public class PreservesJmsMessagePropertiesStrategyTest {
                 () -> {
                     processor.setEncoderType(EchoMessagePropertyEncoder1.class);
                     processor.setProperties(new PropagationProperties());
-                    processor.setEurekaInstanceProperties(new EurekaInstanceProperties());
+                    processor.setInstanceProperties(new EurekaInstanceProperties());
                     processor.postProcessAfterInitialization(mock(ConnectionFactory.class), beanName);
                 });
     }
@@ -60,7 +60,7 @@ public class PreservesJmsMessagePropertiesStrategyTest {
                 () -> {
                     processor.setEncoderType(EchoMessagePropertyEncoder2.class);
                     processor.setProperties(new PropagationProperties());
-                    processor.setEurekaInstanceProperties(new EurekaInstanceProperties());
+                    processor.setInstanceProperties(new EurekaInstanceProperties());
                     processor.postProcessAfterInitialization(mock(ConnectionFactory.class), beanName);
                 });
     }
@@ -70,7 +70,7 @@ public class PreservesJmsMessagePropertiesStrategyTest {
         PropagationProperties propagationProperties = new PropagationProperties();
         propagationProperties.getJms().getExcludes().add(compile(beanName));
         processor.setProperties(propagationProperties);
-        processor.setEurekaInstanceProperties(new EurekaInstanceProperties());
+        processor.setInstanceProperties(new EurekaInstanceProperties());
         assertThat(processor.postProcessAfterInitialization(mock(ConnectionFactory.class), beanName).getClass(), not(equalTo(PreservesHeadersStompSessionAdapter.class)));
     }
 
