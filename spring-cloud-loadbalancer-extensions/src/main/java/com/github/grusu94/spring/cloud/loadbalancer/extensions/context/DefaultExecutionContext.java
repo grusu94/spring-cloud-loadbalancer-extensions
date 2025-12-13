@@ -110,4 +110,9 @@ public class DefaultExecutionContext implements ExecutionContext {
     public DefaultExecutionContext copy() {
         return new DefaultExecutionContext(entries);
     }
+
+    @Override
+    public ExecutionContext from(Map<String, String> contextMap) {
+        return new DefaultExecutionContext(contextMap);
+    }
 }
