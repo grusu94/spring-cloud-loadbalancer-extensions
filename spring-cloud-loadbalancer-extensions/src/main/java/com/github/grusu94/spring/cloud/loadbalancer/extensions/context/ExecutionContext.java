@@ -1,6 +1,7 @@
 package com.github.grusu94.spring.cloud.loadbalancer.extensions.context;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -76,4 +77,11 @@ public interface ExecutionContext extends Serializable {
      * @return a deep copy of {@code this} instance.
      */
     ExecutionContext copy();
+
+    /**
+     * Creates an ExecutionContext from a map
+     * @param contextMap the map containing context entries
+     * @return a new ExecutionContext instance
+     */
+    ExecutionContext from(Map<String, String> contextMap);
 }
