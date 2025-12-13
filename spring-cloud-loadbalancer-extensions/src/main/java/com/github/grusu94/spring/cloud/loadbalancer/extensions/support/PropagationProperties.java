@@ -59,12 +59,12 @@ public class PropagationProperties {
     }
 
     /**
-     * @param eurekaInstanceProperties the eureka instance properties.
+     * @param instanceProperties the instance properties.
      * @return the extra static entries
      */
-    public Map<String, String> buildExtraStaticEntries(EurekaInstanceProperties eurekaInstanceProperties) {
+    public Map<String, String> buildExtraStaticEntries(InstanceProperties instanceProperties) {
         if (upStreamZone.isEnabled()) {
-            getExtraStaticEntries().put(upStreamZone.getKey(), eurekaInstanceProperties.getZone());
+            getExtraStaticEntries().put(upStreamZone.getKey(), instanceProperties.getZone());
         }
         return extraStaticEntries;
     }

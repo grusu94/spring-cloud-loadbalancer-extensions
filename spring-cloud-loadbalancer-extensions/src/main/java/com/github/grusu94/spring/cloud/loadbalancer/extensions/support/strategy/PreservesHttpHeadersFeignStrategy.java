@@ -1,7 +1,7 @@
 package com.github.grusu94.spring.cloud.loadbalancer.extensions.support.strategy;
 
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.feign.PreservesHttpHeadersFeignInterceptor;
-import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.EurekaInstanceProperties;
+import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.InstanceProperties;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.PropagationProperties;
 import feign.Feign;
 import feign.RequestInterceptor;
@@ -23,11 +23,11 @@ import org.springframework.context.annotation.Configuration;
 public class PreservesHttpHeadersFeignStrategy {
 
     private final PropagationProperties properties;
-    private final EurekaInstanceProperties eurekaInstanceProperties;
+    private final InstanceProperties instanceProperties;
 
-    public PreservesHttpHeadersFeignStrategy(PropagationProperties properties, EurekaInstanceProperties eurekaInstanceProperties) {
+    public PreservesHttpHeadersFeignStrategy(PropagationProperties properties, InstanceProperties instanceProperties) {
         this.properties = properties;
-        this.eurekaInstanceProperties = eurekaInstanceProperties;
+        this.instanceProperties = instanceProperties;
     }
 
     /**
@@ -40,6 +40,6 @@ public class PreservesHttpHeadersFeignStrategy {
                 properties.getKeys(), properties.getFeign().getIncludes(), properties.getFeign().getExcludes());
         return new PreservesHttpHeadersFeignInterceptor(properties.getFeign(),
                 properties.buildEntriesFilter(),
-                properties.buildExtraStaticEntries(eurekaInstanceProperties));
+                properties.buildExtraStaticEntries(instanceProperties));
     }
 }

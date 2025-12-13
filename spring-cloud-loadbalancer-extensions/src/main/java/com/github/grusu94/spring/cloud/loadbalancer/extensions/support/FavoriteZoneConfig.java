@@ -43,6 +43,8 @@ public class FavoriteZoneConfig {
     /**
      * Favorite zone rule bean.
      *
+     * @param context to build the ServiceInstanceListSupplier
+     * @param instanceProperties the service instance properties
      * @param favoriteZoneProperties the favorite zone properties
      * @param propagationProperties  the propagation properties
      * @return the favorite zone rule
@@ -50,9 +52,9 @@ public class FavoriteZoneConfig {
 
     @Bean
     public ServiceInstanceListSupplier favoriteZone(ConfigurableApplicationContext context,
-                                                 EurekaInstanceProperties eurekaInstanceProperties,
-                                                 FavoriteZoneProperties favoriteZoneProperties,
-                                                 PropagationProperties propagationProperties) {
+                                                    InstanceProperties instanceProperties,
+                                                    FavoriteZoneProperties favoriteZoneProperties,
+                                                    PropagationProperties propagationProperties) {
 
         final ServiceInstanceListSupplier delegate = ServiceInstanceListSupplier.builder()
                 .withDiscoveryClient()
@@ -60,7 +62,7 @@ public class FavoriteZoneConfig {
 
         final CompositeStrategyMatcher compositeStrategyMatcher = new CompositeStrategyMatcher(List.of(
            new DynamicZoneMatcher(favoriteZoneProperties.getKey()),
-           new ZoneAffinityMatcher(eurekaInstanceProperties.getZone()),
+           new ZoneAffinityMatcher(instanceProperties.getZone()),
            new DynamicZoneMatcher(propagationProperties.getUpStreamZone().getKey()),
            new ZoneAffinityMatcher(favoriteZoneProperties.getFallback()),
            new ZoneAvoidanceMatcher(0.8),
