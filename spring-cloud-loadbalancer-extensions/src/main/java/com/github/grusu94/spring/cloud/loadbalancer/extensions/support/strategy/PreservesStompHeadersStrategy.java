@@ -1,7 +1,7 @@
 package com.github.grusu94.spring.cloud.loadbalancer.extensions.support.strategy;
 
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.stomp.PreservesHeadersStompSessionAdapter;
-import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.EurekaInstanceProperties;
+import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.InstanceProperties;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.PropagationProperties;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -25,11 +25,11 @@ import org.springframework.messaging.simp.stomp.StompSession;
 public class PreservesStompHeadersStrategy implements InstantiationAwareBeanPostProcessor {
 
     private PropagationProperties propagationProperties;
-    private EurekaInstanceProperties eurekaInstanceProperties;
+    private InstanceProperties instanceProperties;
 
-    public PreservesStompHeadersStrategy(PropagationProperties propagationProperties, EurekaInstanceProperties eurekaInstanceProperties) {
+    public PreservesStompHeadersStrategy(PropagationProperties propagationProperties, InstanceProperties instanceProperties) {
         this.propagationProperties = propagationProperties;
-        this.eurekaInstanceProperties = eurekaInstanceProperties;
+        this.instanceProperties = instanceProperties;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class PreservesStompHeadersStrategy implements InstantiationAwareBeanPost
                         propagationProperties.getKeys());
                 return new PreservesHeadersStompSessionAdapter((StompSession) bean,
                         propagationProperties.buildEntriesFilter(),
-                        propagationProperties.buildExtraStaticEntries(eurekaInstanceProperties));
+                        propagationProperties.buildExtraStaticEntries(instanceProperties));
             } else {
                 log.debug("Context propagation DISABLED for stomp session [{}]", beanName);
             }

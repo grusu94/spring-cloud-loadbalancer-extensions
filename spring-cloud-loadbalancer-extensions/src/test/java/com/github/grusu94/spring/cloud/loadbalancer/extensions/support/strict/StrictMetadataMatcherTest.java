@@ -30,6 +30,7 @@ import static org.springframework.http.HttpStatus.OK;
                 "spring.application.name=strict-meta-data-matcher-test",
                 "endpoints.enabled=false",
                 "eureka.client.enabled=false",
+                "spring.cloud.consul.enabled=false",
                 "eureka.instance.metadataMap.zone=zone1",
                 "loadbalancer.extensions.propagation.keys[0]=key1",
                 "spring.main.web-application-type=servlet",

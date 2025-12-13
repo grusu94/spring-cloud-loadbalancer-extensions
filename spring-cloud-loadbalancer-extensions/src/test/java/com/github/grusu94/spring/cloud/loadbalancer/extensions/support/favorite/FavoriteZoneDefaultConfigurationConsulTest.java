@@ -12,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
                 "endpoints.enabled=false",
                 "eureka.client.enabled=false",
                 "spring.cloud.consul.enabled=false",
-                "eureka.instance.metadataMap.zone=zone1",
+                "spring.cloud.consul.discovery.instance-zone=zone1",
                 "loadbalancer.extensions.propagation.keys[0]=favorite-zone",
                 "loadbalancer.extensions.propagation.keys[1]=upstream-zone",
                 "spring.main.web-application-type=servlet",
@@ -20,8 +20,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
                 "spring.cloud.loadbalancer.cache.enabled=false"
         }
 )
-public class FavoriteZoneDefaultConfigurationTest extends AbstractFavoriteZoneSupportTest {
-    public FavoriteZoneDefaultConfigurationTest() {
+public class FavoriteZoneDefaultConfigurationConsulTest extends AbstractFavoriteZoneSupportTest {
+    public FavoriteZoneDefaultConfigurationConsulTest() {
         super("zone");
     }
 }

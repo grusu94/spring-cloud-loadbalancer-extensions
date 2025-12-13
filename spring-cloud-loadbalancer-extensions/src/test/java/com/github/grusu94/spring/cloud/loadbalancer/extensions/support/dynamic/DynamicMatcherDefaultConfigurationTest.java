@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
                 "spring.application.name=dynamic-matcher-test",
                 "endpoints.enabled=false",
                 "eureka.client.enabled=false",
+                "spring.cloud.consul.enabled=false",
                 "loadbalancer.extensions.propagation.keys[0]=dynamic-matcher-key",
                 "loadbalancer.extensions.propagation.keys[1]=instance-id",
                 "spring.main.web-application-type=servlet",

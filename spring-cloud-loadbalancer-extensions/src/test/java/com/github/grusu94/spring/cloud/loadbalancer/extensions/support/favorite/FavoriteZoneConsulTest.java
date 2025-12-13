@@ -5,14 +5,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {AbstractFavoriteZoneSupportTest.FavoriteZoneApplication.class},
+@SpringBootTest(classes = { AbstractFavoriteZoneSupportTest.FavoriteZoneApplication.class },
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = {
-                "spring.application.name=favorite-zone-test",
+                "spring.application.name=favorite-zone-consul-test",
                 "endpoints.enabled=false",
                 "eureka.client.enabled=false",
                 "spring.cloud.consul.enabled=false",
-                "eureka.instance.metadataMap.zone=zone1",
+                "spring.cloud.consul.discovery.instance-zone=zone1",
                 "loadbalancer.extensions.propagation.keys[0]=favorite-zone",
                 "loadbalancer.extensions.propagation.keys[1]=upstream-zone",
                 "spring.main.web-application-type=servlet",
@@ -20,8 +20,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
                 "spring.cloud.loadbalancer.cache.enabled=false"
         }
 )
-public class FavoriteZoneDefaultConfigurationTest extends AbstractFavoriteZoneSupportTest {
-    public FavoriteZoneDefaultConfigurationTest() {
+public class FavoriteZoneConsulTest extends AbstractFavoriteZoneSupportTest {
+
+    public FavoriteZoneConsulTest() {
         super("zone");
     }
 }

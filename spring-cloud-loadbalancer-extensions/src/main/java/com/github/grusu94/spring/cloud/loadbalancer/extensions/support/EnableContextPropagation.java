@@ -32,8 +32,8 @@ import java.util.concurrent.ExecutorService;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@EnableConfigurationProperties({PropagationProperties.class, EurekaInstanceProperties.class})
-@Import(ExecutionContextPropagationImport.class)
+@EnableConfigurationProperties({ PropagationProperties.class })
+@Import({ExecutionContextPropagationImport.class, InstancePropertiesConfig.class})
 public @interface EnableContextPropagation {
     /**
      * default value is {@code true}.

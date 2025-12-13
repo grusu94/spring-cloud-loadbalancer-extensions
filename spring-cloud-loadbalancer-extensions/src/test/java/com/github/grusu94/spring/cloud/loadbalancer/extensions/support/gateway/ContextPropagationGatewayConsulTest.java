@@ -15,17 +15,18 @@ import jakarta.inject.Inject;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {ContextPropagationGatewayTest.Application.class},
+@SpringBootTest(classes = {ContextPropagationGatewayConsulTest.Application.class},
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = {
                 "eureka.client.enabled=false",
                 "spring.cloud.consul.enabled=false",
+                "spring.cloud.consul.discovery.instance-zone=zone1",
                 "spring.main.web-application-type=servlet",
                 "spring.cloud.gateway.enabled=false",
         }
 )
 @EnableHttpLogging
-public class ContextPropagationGatewayTest {
+public class ContextPropagationGatewayConsulTest {
 
     @Inject
     RequestInterceptor requestInterceptor;
