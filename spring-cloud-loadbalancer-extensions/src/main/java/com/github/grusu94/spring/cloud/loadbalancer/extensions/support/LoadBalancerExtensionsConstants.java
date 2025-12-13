@@ -24,6 +24,11 @@ public class LoadBalancerExtensionsConstants {
     public static final String EUREKA_ZONE_PROPERTY = "zone";
     public static final String DEFAULT_EUREKA_ZONE = "default";
 
+    public static final String CONSUL_INSTANCE_ID = "instanceId";
+    public static final String CONSUL_INSTANCE_PREFIX = "spring.cloud.consul.discovery";
+    public static final String CONSUL_ZONE_PROPERTY = "zone";
+    public static final String DEFAULT_CONSUL_ZONE = "default";
+
     public static final String FAVORITE_ZONE_RULE = "favorite-zone";
     public static final String FAVORITE_ZONE_PREFIX = RULE_PREFIX + DOT + FAVORITE_ZONE_RULE;
     public static final String FAVORITE_ZONE_RULE_ENABLED = FAVORITE_ZONE_PREFIX + DOT + ENABLED;

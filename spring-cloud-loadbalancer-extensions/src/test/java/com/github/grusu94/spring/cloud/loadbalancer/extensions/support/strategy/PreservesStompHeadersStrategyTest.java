@@ -30,7 +30,7 @@ public class PreservesStompHeadersStrategyTest {
     @Test
     public void should_decorate_stomp_session() {
         processor.setPropagationProperties(new PropagationProperties());
-        processor.setEurekaInstanceProperties(new EurekaInstanceProperties());
+        processor.setInstanceProperties(new EurekaInstanceProperties());
         assertThat(processor.postProcessAfterInitialization(mock(StompSession.class), beanName).getClass(), equalTo(PreservesHeadersStompSessionAdapter.class));
     }
 
@@ -39,7 +39,7 @@ public class PreservesStompHeadersStrategyTest {
         PropagationProperties propagationProperties = new PropagationProperties();
         propagationProperties.getStomp().getExcludes().add(compile(beanName));
         processor.setPropagationProperties(propagationProperties);
-        processor.setEurekaInstanceProperties(new EurekaInstanceProperties());
+        processor.setInstanceProperties(new EurekaInstanceProperties());
         assertThat(processor.postProcessAfterInitialization(mock(StompSession.class), beanName).getClass(), not(equalTo(PreservesHeadersStompSessionAdapter.class)));
     }
 }
