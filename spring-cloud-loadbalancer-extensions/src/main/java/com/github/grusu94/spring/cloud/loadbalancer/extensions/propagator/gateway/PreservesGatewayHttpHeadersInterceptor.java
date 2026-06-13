@@ -23,7 +23,7 @@ import java.util.Map;
 @Slf4j
 public class PreservesGatewayHttpHeadersInterceptor implements GlobalFilter, Ordered {
 
-    public static final String GATEWAY_CONTEXT_KEY = "PreservesGatewayHttpHeaders";
+    public static final String REACTOR_CONTEXT_KEY = "DefaultContextKey";
 
     /**
      * The request header names filter
@@ -54,7 +54,7 @@ public class PreservesGatewayHttpHeadersInterceptor implements GlobalFilter, Ord
         } catch (Exception e) {
             log.debug("Failed to propagate http request header.", e);
         }
-        return chain.filter(exchange).contextWrite(ctx -> ctx.put(GATEWAY_CONTEXT_KEY, contextMap));
+        return chain.filter(exchange).contextWrite(ctx -> ctx.put(REACTOR_CONTEXT_KEY, contextMap));
     }
 
     @Override

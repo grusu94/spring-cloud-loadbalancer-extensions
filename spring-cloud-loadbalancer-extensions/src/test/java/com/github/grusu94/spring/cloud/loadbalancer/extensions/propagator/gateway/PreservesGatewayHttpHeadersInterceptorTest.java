@@ -13,8 +13,7 @@ import reactor.test.StepVerifier;
 
 import java.util.*;
 
-import static com.github.grusu94.spring.cloud.loadbalancer.extensions.context.ExecutionContextHolder.current;
-import static com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.gateway.PreservesGatewayHttpHeadersInterceptor.GATEWAY_CONTEXT_KEY;
+import static com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.gateway.PreservesGatewayHttpHeadersInterceptor.REACTOR_CONTEXT_KEY;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -52,8 +51,8 @@ public class PreservesGatewayHttpHeadersInterceptorTest {
        exchange = MockServerWebExchange.from(requestBuilder);
 
        Mono<Void> result = propagator.filter(exchange, e -> Mono.deferContextual(contextView -> {
-           if (contextView.hasKey(GATEWAY_CONTEXT_KEY)) {
-               final Map<String, String> context = contextView.get(GATEWAY_CONTEXT_KEY);
+           if (contextView.hasKey(REACTOR_CONTEXT_KEY)) {
+               final Map<String, String> context = contextView.get(REACTOR_CONTEXT_KEY);
                attributes.forEach(x -> assertThat(context.get(x), equalTo(x)));
            }
            return Mono.empty();
@@ -69,8 +68,8 @@ public class PreservesGatewayHttpHeadersInterceptorTest {
         when(chain.filter(any(ServerWebExchange.class))).thenReturn(Mono.empty());
 
         Mono<Void> result = propagator.filter(exchange, e -> Mono.deferContextual(contextView -> {
-            if (contextView.hasKey(GATEWAY_CONTEXT_KEY)) {
-                final Map<String, String> context = contextView.get(GATEWAY_CONTEXT_KEY);
+            if (contextView.hasKey(REACTOR_CONTEXT_KEY)) {
+                final Map<String, String> context = contextView.get(REACTOR_CONTEXT_KEY);
                 attributes.forEach(x -> assertThat(context.size(), equalTo(0)));
             }
             return Mono.empty();
@@ -88,7 +87,7 @@ public class PreservesGatewayHttpHeadersInterceptorTest {
 
         StepVerifier.create(result)
                 .expectAccessibleContext()
-                .contains(GATEWAY_CONTEXT_KEY, Map.of())
+                .contains(REACTOR_CONTEXT_KEY, Map.of())
                 .then()
                 .verifyComplete();
     }
