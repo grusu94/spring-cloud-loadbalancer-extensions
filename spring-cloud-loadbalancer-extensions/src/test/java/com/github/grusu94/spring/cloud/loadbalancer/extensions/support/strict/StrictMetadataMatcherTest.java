@@ -4,10 +4,12 @@ import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.concur
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.AbstractSupportTest;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.EnableContextPropagation;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.EnableLoadBalancerStrictMetadataMatcher;
+import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.InstanceProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClients;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -39,6 +41,9 @@ import static org.springframework.http.HttpStatus.OK;
         }
 )
 public class StrictMetadataMatcherTest extends AbstractSupportTest {
+
+    @MockBean
+    private InstanceProperties instanceProperties;
 
     @Test
     public void test_choose_server1() {
