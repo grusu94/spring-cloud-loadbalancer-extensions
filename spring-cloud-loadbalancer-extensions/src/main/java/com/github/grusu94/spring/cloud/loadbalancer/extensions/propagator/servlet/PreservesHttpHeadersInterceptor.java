@@ -5,6 +5,7 @@ import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.Execution
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.Filter;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

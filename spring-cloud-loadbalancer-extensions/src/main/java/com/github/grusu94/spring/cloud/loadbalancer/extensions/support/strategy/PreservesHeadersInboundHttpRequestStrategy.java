@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * Default inbound http request propagation strategy based on http request headers copy to the execution context.
  */
 @Configuration
-@ConditionalOnWebApplication
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @ConditionalOnProperty(value = "loadbalancer.extensions.propagation.http.enabled", matchIfMissing = true)
 @ConditionalOnExpression(value = "${loadbalancer.extensions.propagation.enabled:true}")
 @Slf4j

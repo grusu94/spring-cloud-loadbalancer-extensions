@@ -111,6 +111,9 @@ public class DefaultExecutionContext implements ExecutionContext {
         return new DefaultExecutionContext(entries);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ExecutionContext from(Map<String, String> contextMap) {
         return new DefaultExecutionContext(contextMap);
