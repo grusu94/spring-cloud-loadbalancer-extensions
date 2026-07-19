@@ -2,11 +2,13 @@ package com.github.grusu94.spring.cloud.loadbalancer.extensions.support.gateway;
 
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.EnableContextPropagation;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.EnableHttpLogging;
+import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.InstanceProperties;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.PropagationProperties;
 import feign.RequestInterceptor;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,7 +17,7 @@ import javax.inject.Inject;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {ContextPropagationGatewayTest.Application.class},
+@SpringBootTest(classes = {ContextPropagationGatewayEurekaTest.Application.class},
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = {
                 "eureka.client.enabled=false",
@@ -25,12 +27,15 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
         }
 )
 @EnableHttpLogging
-public class ContextPropagationGatewayTest {
+public class ContextPropagationGatewayEurekaTest {
 
     @Inject
     RequestInterceptor requestInterceptor;
     @Inject
     PropagationProperties properties;
+
+    @MockBean
+    private InstanceProperties instanceProperties;
 
     @SpringBootApplication
     @EnableContextPropagation

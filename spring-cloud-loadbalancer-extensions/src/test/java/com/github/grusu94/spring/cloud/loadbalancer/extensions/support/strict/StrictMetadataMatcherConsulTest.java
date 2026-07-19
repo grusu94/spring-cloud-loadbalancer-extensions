@@ -1,5 +1,6 @@
 package com.github.grusu94.spring.cloud.loadbalancer.extensions.support.strict;
 
+import com.ecwid.consul.v1.ConsulClient;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.concurrent.ContextAwareExecutorService;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.AbstractSupportTest;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.EnableContextPropagation;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClients;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -30,7 +32,8 @@ import static org.springframework.http.HttpStatus.OK;
                 "spring.application.name=strict-meta-data-matcher-test",
                 "endpoints.enabled=false",
                 "eureka.client.enabled=false",
-                "spring.cloud.consul.enabled=false",
+                "spring.cloud.consul.enabled=true",
+                "spring.cloud.consul.discovery.catalog-services-watch.enabled=false",
                 "spring.cloud.consul.discovery.instance-zone=zone1",
                 "loadbalancer.extensions.propagation.keys[0]=key1",
                 "spring.main.web-application-type=servlet",
@@ -39,6 +42,9 @@ import static org.springframework.http.HttpStatus.OK;
         }
 )
 public class StrictMetadataMatcherConsulTest extends AbstractSupportTest {
+
+    @MockBean
+    private ConsulClient consulClient;
 
     @Test
     public void test_choose_server1() {

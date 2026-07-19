@@ -1,6 +1,6 @@
-package com.github.grusu94.spring.cloud.loadbalancer.extensions.support.strict;
+package com.github.grusu94.spring.cloud.loadbalancer.extensions.support.favorite;
 
-import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.StrictMetadataMatcherConfig;
+import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.FavoriteZoneConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -14,10 +14,10 @@ import javax.inject.Inject;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = StrictMetadataMatcherConfig.class, properties = {
+@SpringBootTest(classes = FavoriteZoneConfig.class, properties = {
         "loadbalancer.client.name=application",
-        "loadbalancer.extensions.client.application.rule.strict-metadata-matcher.enabled=false"})
-public class StrictMetadataMatcherClientDisabledTest {
+        "loadbalancer.extensions.client.application.rule.favorite-zone.enabled=false"})
+public class FavoriteZoneClientDisabledEurekaTest {
 
     @Inject
     ApplicationContext applicationContext;
