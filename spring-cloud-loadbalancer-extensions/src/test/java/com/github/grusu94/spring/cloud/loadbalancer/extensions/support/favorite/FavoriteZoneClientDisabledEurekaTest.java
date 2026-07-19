@@ -15,8 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = FavoriteZoneConfig.class, properties = {
-        "loadbalancer.extensions.rule.favorite-zone.enabled=false"})
-public class FavoriteZoneGloballyDisabledTest {
+        "loadbalancer.client.name=application",
+        "loadbalancer.extensions.client.application.rule.favorite-zone.enabled=false"})
+public class FavoriteZoneClientDisabledEurekaTest {
 
     @Inject
     ApplicationContext applicationContext;

@@ -1,7 +1,9 @@
 package com.github.grusu94.spring.cloud.loadbalancer.extensions.support.dynamic;
 
+import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.InstanceProperties;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
@@ -21,8 +23,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
                 "spring.cloud.loadbalancer.cache.enabled=false"
         }
 )
-public class DynamicMatcherClientConfigurationTest extends AbstractDynamicMatcherSupportTest {
-    public DynamicMatcherClientConfigurationTest() {
+public class DynamicMatcherClientConfigurationEurekaTest extends AbstractDynamicMatcherSupportTest {
+
+    @MockBean
+    private InstanceProperties instanceProperties;
+
+    public DynamicMatcherClientConfigurationEurekaTest() {
         super("mykey", false);
     }
 

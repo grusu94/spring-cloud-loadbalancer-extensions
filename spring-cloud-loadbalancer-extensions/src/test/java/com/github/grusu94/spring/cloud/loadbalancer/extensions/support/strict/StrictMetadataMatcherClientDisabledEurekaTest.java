@@ -15,8 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = StrictMetadataMatcherConfig.class, properties = {
-        "loadbalancer.extensions.rule.strict-metadata-matcher.enabled=false"})
-public class StrictMetadataMatcherGloballyDisabledTest {
+        "loadbalancer.client.name=application",
+        "loadbalancer.extensions.client.application.rule.strict-metadata-matcher.enabled=false"})
+public class StrictMetadataMatcherClientDisabledEurekaTest {
 
     @Inject
     ApplicationContext applicationContext;

@@ -1,7 +1,9 @@
 package com.github.grusu94.spring.cloud.loadbalancer.extensions.support.favorite;
 
+import com.ecwid.consul.v1.ConsulClient;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
@@ -11,7 +13,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
                 "spring.application.name=favorite-zone-test",
                 "endpoints.enabled=false",
                 "eureka.client.enabled=false",
-                "spring.cloud.consul.enabled=false",
+                "spring.cloud.consul.enabled=true",
+                "spring.cloud.consul.discovery.catalog-services-watch.enabled=false",
                 "spring.cloud.consul.discovery.instance-zone=zone1",
                 "loadbalancer.extensions.propagation.keys[0]=my-favorite-zone",
                 "loadbalancer.extensions.rule.favorite-zone.key=my-favorite-zone",
@@ -21,6 +24,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
         }
 )
 public class FavoriteZoneClientConfigurationConsulTest extends AbstractFavoriteZoneSupportTest {
+
+    @MockBean
+    private ConsulClient consulClient;
 
     public FavoriteZoneClientConfigurationConsulTest() {
         super("favorite-zone");

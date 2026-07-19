@@ -32,10 +32,10 @@ public class InstancePropertiesConfig {
 
     /**
      * Consul instance properties configuration
-     * Active when Eureka is not enabled
+     * Active when Consul is enabled
      */
     @Configuration
-    @ConditionalOnProperty(name = "eureka.client.enabled", havingValue = "false")
+    @ConditionalOnProperty(name = "spring.cloud.consul.enabled", havingValue = "true")
     @EnableConfigurationProperties(ConsulInstanceProperties.class)
     static class ConsulConfig {
 
