@@ -9,12 +9,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClients;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.concurrent.ExecutorService;
@@ -36,13 +36,13 @@ import static org.springframework.http.HttpStatus.OK;
                 "eureka.instance.metadataMap.zone=zone1",
                 "loadbalancer.extensions.propagation.keys[0]=key1",
                 "spring.main.web-application-type=servlet",
-                "spring.cloud.gateway.enabled=false",
+                "spring.cloud.gateway.server.webflux.enabled=false",
                 "spring.cloud.loadbalancer.cache.enabled=false"
         }
 )
 public class StrictMetadataMatcherTest extends AbstractSupportTest {
 
-    @MockBean
+    @MockitoBean
     private InstanceProperties instanceProperties;
 
     @Test
