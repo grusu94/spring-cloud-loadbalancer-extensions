@@ -8,7 +8,7 @@ import feign.RequestInterceptor;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,7 +23,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
                 "eureka.client.enabled=false",
                 "spring.cloud.consul.enabled=false",
                 "spring.main.web-application-type=servlet",
-                "spring.cloud.gateway.enabled=false",
+                "spring.cloud.gateway.server.webflux.enabled=false",
         }
 )
 @EnableHttpLogging
@@ -34,7 +34,7 @@ public class ContextPropagationGatewayEurekaTest {
     @Inject
     PropagationProperties properties;
 
-    @MockBean
+    @MockitoBean
     private InstanceProperties instanceProperties;
 
     @SpringBootApplication

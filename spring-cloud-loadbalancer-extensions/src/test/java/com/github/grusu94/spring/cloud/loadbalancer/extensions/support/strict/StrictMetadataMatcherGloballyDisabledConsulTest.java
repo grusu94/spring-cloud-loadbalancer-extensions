@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
 import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import jakarta.inject.Inject;
@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
         "loadbalancer.extensions.rule.strict-metadata-matcher.enabled=false"})
 public class StrictMetadataMatcherGloballyDisabledConsulTest {
 
-    @MockBean
+    @MockitoBean
     private ConsulClient consulClient;
 
     @Inject

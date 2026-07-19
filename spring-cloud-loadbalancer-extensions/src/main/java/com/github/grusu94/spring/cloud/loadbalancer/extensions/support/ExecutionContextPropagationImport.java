@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Registers the propagation strategies defined within {@link EnableContextPropagation}.
