@@ -1,0 +1,4 @@
+# AutoConfigurationImportFilter
+org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
+com.github.grusu94.spring.cloud.loadbalancer.extensions.config.ConsulAutoConfig,\
+com.github.grusu94.spring.cloud.loadbalancer.extensions.config.EurekaAutoConfig
