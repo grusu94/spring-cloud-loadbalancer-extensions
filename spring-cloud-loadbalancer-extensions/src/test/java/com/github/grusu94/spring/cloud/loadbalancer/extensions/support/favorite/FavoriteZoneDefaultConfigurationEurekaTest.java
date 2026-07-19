@@ -1,7 +1,9 @@
 package com.github.grusu94.spring.cloud.loadbalancer.extensions.support.favorite;
 
+import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.InstanceProperties;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
@@ -20,8 +22,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
                 "spring.cloud.loadbalancer.cache.enabled=false"
         }
 )
-public class FavoriteZoneDefaultConfigurationTest extends AbstractFavoriteZoneSupportTest {
-    public FavoriteZoneDefaultConfigurationTest() {
+public class FavoriteZoneDefaultConfigurationEurekaTest extends AbstractFavoriteZoneSupportTest {
+
+    @MockBean
+    private InstanceProperties instanceProperties;
+
+    public FavoriteZoneDefaultConfigurationEurekaTest() {
         super("zone");
     }
 }

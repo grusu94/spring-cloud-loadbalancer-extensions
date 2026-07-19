@@ -1,14 +1,12 @@
 package com.github.grusu94.spring.cloud.loadbalancer.extensions.support.affinity;
 
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.concurrent.ContextAwareExecutorService;
-import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.AbstractSupportTest;
-import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.EnableContextPropagation;
-import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.EnableHttpLogging;
-import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.EnableLoadBalancerZoneAffinity;
+import com.github.grusu94.spring.cloud.loadbalancer.extensions.support.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClients;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -24,7 +22,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.http.HttpStatus.OK;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {ZoneAffinityTest.ZoneAffinityApplication.class},
+@SpringBootTest(classes = {ZoneAffinityEurekaTest.ZoneAffinityApplication.class},
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = {
                 "spring.application.name=zone-affinity-test",
@@ -37,7 +35,10 @@ import static org.springframework.http.HttpStatus.OK;
                 "spring.cloud.loadbalancer.cache.enabled=false"
         }
 )
-public class ZoneAffinityTest extends AbstractSupportTest {
+public class ZoneAffinityEurekaTest extends AbstractSupportTest {
+
+    @MockBean
+    private InstanceProperties instanceProperties;
 
     @Test
     public void test_choose_server1() {
