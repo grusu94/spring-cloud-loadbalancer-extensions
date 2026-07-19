@@ -2,6 +2,7 @@ package com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.concu
 
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.ExecutionContext;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.ExecutionContextHolder;
+import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.ExecutionContextScope;
 
 /**
  * Copies current {@link ExecutionContext} to delegate runnable.
@@ -31,8 +32,10 @@ public class ContextAwareRunnable implements Runnable {
      */
     @Override
     public void run() {
-        ExecutionContextHolder.switchTo(context);
-        delegate.run();
+        try (ExecutionContextScope ignored =
+                     ExecutionContextHolder.openScope(context)) {
+            delegate.run();
+        }
     }
 
     /**

@@ -2,6 +2,7 @@ package com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.concu
 
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.ExecutionContext;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.ExecutionContextHolder;
+import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.ExecutionContextScope;
 
 import java.util.Collection;
 import java.util.concurrent.Callable;
@@ -35,8 +36,10 @@ public class ContextAwareCallable<T> implements Callable<T> {
      */
     @Override
     public T call() throws Exception {
-        ExecutionContextHolder.switchTo(context);
-        return delegate.call();
+        try (ExecutionContextScope ignored =
+                     ExecutionContextHolder.openScope(context)) {
+            return delegate.call();
+        }
     }
 
     /**

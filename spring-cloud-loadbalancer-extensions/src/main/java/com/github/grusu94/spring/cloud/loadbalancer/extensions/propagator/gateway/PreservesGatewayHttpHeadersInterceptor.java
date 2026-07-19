@@ -1,7 +1,8 @@
 package com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.gateway;
 
+import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.DefaultExecutionContext;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.ExecutionContext;
-import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.ExecutionContextHolder;
+import com.github.grusu94.spring.cloud.loadbalancer.extensions.context.ReactorExecutionContext;
 import com.github.grusu94.spring.cloud.loadbalancer.extensions.propagator.Filter;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Copies Http Headers to the current {@link ExecutionContext} pre-filtering the header names using the provided
@@ -36,8 +40,9 @@ public class PreservesGatewayHttpHeadersInterceptor implements GlobalFilter, Ord
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        final Map<String, String> context = new HashMap<>();
+
         try {
-            ExecutionContext context = ExecutionContextHolder.current();
             HttpHeaders headers = exchange.getRequest().getHeaders();
             headers.keySet()
                     .stream()
@@ -48,10 +53,10 @@ public class PreservesGatewayHttpHeadersInterceptor implements GlobalFilter, Ord
         } catch (Exception e) {
             log.debug("Failed to propagate http request header.", e);
         }
-        return chain.filter(exchange).doOnTerminate(() -> {
-            ExecutionContextHolder.remove();
-            log.trace("Context cleaned up");
-        });
+
+        final ExecutionContext executionContext = new DefaultExecutionContext(context);
+        return chain.filter(exchange)
+                .contextWrite(ctx -> ReactorExecutionContext.put(ctx, executionContext));
     }
 
     @Override
