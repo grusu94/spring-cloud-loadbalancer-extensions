@@ -1,3 +1,7 @@
+# AutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.github.grusu94.spring.cloud.loadbalancer.extensions.config.ReactiveExecutionContextAutoConfig
+
 # AutoConfigurationImportFilter
 org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
 com.github.grusu94.spring.cloud.loadbalancer.extensions.config.ConsulAutoConfig,\

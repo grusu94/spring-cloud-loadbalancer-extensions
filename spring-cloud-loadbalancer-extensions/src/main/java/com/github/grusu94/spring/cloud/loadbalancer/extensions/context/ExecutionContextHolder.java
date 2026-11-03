@@ -53,4 +53,23 @@ public final class ExecutionContextHolder {
         CONTEXT.remove();
         return current;
     }
+
+    /**
+     * opens a new scope for the provided CONTEXT.
+     *
+     * @param context the CONTEXT to open a new scope for.
+     * @return the {@link ExecutionContextScope} that will close the scope when invoked.
+     */
+    public static ExecutionContextScope openScope(ExecutionContext context) {
+        ExecutionContext previous = current();
+        switchTo(context);
+
+        return () -> {
+            if (previous == null) {
+                remove();
+            } else {
+                switchTo(previous);
+            }
+        };
+    }
 }
